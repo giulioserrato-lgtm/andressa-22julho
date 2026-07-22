@@ -455,22 +455,36 @@
     border-color: var(--rosa-medio);
     box-shadow: 0 0 0 3px rgba(219,39,119,.12);
   }
+  .campo-observacao textarea:disabled {
+    opacity: .4;
+    background: #1A0A10;
+  }
 
-  /* Falta única */
+  /* Falta única - agora à direita */
+  .linha-rodape {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: .5rem;
+  }
   .falta-unica {
     display: flex;
     align-items: center;
     gap: .6rem;
     font-size: 1rem;
     font-weight: 700;
-    color: var(--alerta);
+    color: var(--texto-claro);
     cursor: pointer;
     user-select: none;
-    margin-top: .3rem;
     padding: .3rem .6rem;
     background: #3A2028;
     border-radius: 8px;
     border: 1px solid #5A3A4A;
+  }
+  .falta-unica.marcada {
+    color: var(--alerta);
+    border-color: var(--alerta);
   }
   .falta-unica input {
     width: 1.5rem;
@@ -491,11 +505,6 @@
   .horas-dia.vazio {
     color: #8A6A7A;
     background: #1A0A10;
-  }
-  .rodape-linha {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: .3rem;
   }
 
   /* Resumos individuais */
@@ -830,15 +839,13 @@
     </div>
   </div>
 
-  <!-- Fotos dos pacientes (somente aqui) -->
+  <!-- Fotos dos pacientes com imagens locais -->
   <div class="fotos-pacientes">
     <div class="foto-paciente">
-      <!-- Substitua o src pela foto real de José -->
       <img src="jose.png" alt="Foto de José">
       <span>José</span>
     </div>
     <div class="foto-paciente">
-      <!-- Substitua o src pela foto real de Cirene -->
       <img src="cirene.png" alt="Foto de Cirene">
       <span>Cirene</span>
     </div>
@@ -1130,7 +1137,6 @@
       const iso = formatarISO(d);
       const reg = dados[iso];
       if (!reg) return;
-      // Se a sessão tiver falta, não é cobrada
       if (reg.falta) return;
       total++;
     });
@@ -1327,19 +1333,6 @@
       horarios.appendChild(cEntrada);
       horarios.appendChild(cSaida);
 
-      // Falta única
-      const faltaDiv = document.createElement('div');
-      faltaDiv.className = 'falta-unica';
-      const chkFalta = document.createElement('input');
-      chkFalta.type = 'checkbox';
-      chkFalta.checked = reg.falta || false;
-      chkFalta.addEventListener('change', () => {
-        atualizarRegistro(iso, { falta: chkFalta.checked });
-      });
-      const labelFalta = document.createTextNode('Falta (sessão cancelada)');
-      faltaDiv.appendChild(chkFalta);
-      faltaDiv.appendChild(labelFalta);
-
       // Grid pacientes
       const grid = document.createElement('div');
       grid.className = 'grid-pacientes';
@@ -1355,12 +1348,10 @@
         </div>
       `;
       const obsJose = colJose.querySelector('textarea');
-      let timerJose = null;
-      obsJose.addEventListener('input', () => {
-        clearTimeout(timerJose);
-        timerJose = setTimeout(() => {
+      obsJose.addEventListener('blur', () => {
+        if (obsJose.value !== reg.obsJose) {
           atualizarRegistro(iso, { obsJose: obsJose.value }, { semRenderizar: true });
-        }, 500);
+        }
       });
 
       // Coluna Cirene
@@ -1374,34 +1365,48 @@
         </div>
       `;
       const obsCirene = colCirene.querySelector('textarea');
-      let timerCirene = null;
-      obsCirene.addEventListener('input', () => {
-        clearTimeout(timerCirene);
-        timerCirene = setTimeout(() => {
+      obsCirene.addEventListener('blur', () => {
+        if (obsCirene.value !== reg.obsCirene) {
           atualizarRegistro(iso, { obsCirene: obsCirene.value }, { semRenderizar: true });
-        }, 500);
+        }
       });
 
       grid.appendChild(colJose);
       grid.appendChild(colCirene);
 
-      // Rodapé com horas
+      // Rodapé: falta à direita e horas
       const rodape = document.createElement('div');
-      rodape.className = 'rodape-linha';
+      rodape.className = 'linha-rodape';
+
+      // Falta (checkbox + texto)
+      const faltaDiv = document.createElement('label');
+      faltaDiv.className = 'falta-unica' + (reg.falta ? ' marcada' : '');
+      const chkFalta = document.createElement('input');
+      chkFalta.type = 'checkbox';
+      chkFalta.checked = reg.falta || false;
+      chkFalta.addEventListener('change', () => {
+        atualizarRegistro(iso, { falta: chkFalta.checked });
+      });
+      const labelFalta = document.createTextNode('Falta (sessão cancelada)');
+      faltaDiv.appendChild(chkFalta);
+      faltaDiv.appendChild(labelFalta);
+
+      // Horas
       const horasCalculadas = reg.falta ? null : calcularHoras(reg.entrada, reg.saida);
       const horasSpan = document.createElement('span');
       horasSpan.className = 'horas-dia' + (horasCalculadas ? '' : ' vazio');
       horasSpan.textContent = reg.falta ? 'Falta' : (horasCalculadas ? horasCalculadas.texto : '—');
+
+      rodape.appendChild(faltaDiv);
       rodape.appendChild(horasSpan);
 
       linha.appendChild(cabeca);
       linha.appendChild(horarios);
-      linha.appendChild(faltaDiv);
       linha.appendChild(grid);
       linha.appendChild(rodape);
       listaEl.appendChild(linha);
 
-      // Estatísticas (considerando falta única)
+      // Estatísticas
       if (reg.falta) {
         faltasJose++;
         faltasCirene++;
