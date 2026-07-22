@@ -16,46 +16,42 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --azul-escuro:#9D174D;
-    --azul-medio:#DB2777;
-    --azul-claro:#FCE7F3;
-    --azul-claro-2:#FBCFE8;
-    --branco:#FFFFFF;
-    --texto-escuro:#3B0A24;
-    --texto-claro:#FFFFFF;
-    --alerta:#9F1239;
-    --alerta-bg:#FFE4E9;
+  :root {
+    --rosa-escuro: #9D174D;
+    --rosa-medio: #DB2777;
+    --rosa-claro: #FCE7F3;
+    --rosa-claro2: #FBCFE8;
+    --branco: #FFFFFF;
+    --texto-escuro: #3B0A24;
+    --texto-claro: #FFFFFF;
+    --alerta: #9F1239;
+    --alerta-bg: #FFE4E9;
     --sombra: 0 8px 24px rgba(157,23,77,0.18);
     --raio: 16px;
+    --fundo: #FFF5F9;
   }
 
-  html{
-    font-size: 112.5%;
-  }
-
-  *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;}
-  body{
-    font-family:'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-    background: linear-gradient(180deg, var(--azul-claro) 0%, #EFF6FF 40%, #F8FBFF 100%);
+  * { box-sizing: border-box; margin:0; padding:0; }
+  html { font-size: 112.5%; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--fundo);
     color: var(--texto-escuro);
-    min-height:100vh;
-    -webkit-font-smoothing:antialiased;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
     padding-bottom: 3rem;
-    line-height:1.45;
+    line-height: 1.5;
   }
-
-  a, button, input, select{ font-family:inherit; }
-
-  *:focus-visible{
+  a, button, input, select, textarea { font-family: inherit; }
+  *:focus-visible {
     outline: 3px solid #FFB74A;
     outline-offset: 2px;
     border-radius: 6px;
   }
 
-  header.topo{
-    background: linear-gradient(135deg, var(--azul-escuro), var(--azul-medio));
+  /* Cabeçalho */
+  header.topo {
+    background: linear-gradient(135deg, var(--rosa-escuro), var(--rosa-medio));
     color: var(--texto-claro);
     padding: 1.4rem 1.1rem 1.6rem;
     border-radius: 0 0 28px 28px;
@@ -63,741 +59,739 @@
     position: relative;
     overflow: hidden;
   }
-  header.topo::after{
-    content:"";
-    position:absolute;
-    right:-40px; top:-60px;
-    width:180px; height:180px;
-    border-radius:50%;
+  header.topo::after {
+    content: "";
+    position: absolute;
+    right: -40px; top: -60px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
     background: rgba(255,255,255,0.08);
   }
-  .barra-superior{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:.6rem;
-    position:relative;
-    z-index:1;
+  .barra-superior {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .6rem;
+    position: relative;
+    z-index: 1;
   }
-  .eyebrow{
-    text-transform:uppercase;
-    letter-spacing:.12em;
-    font-size:.72rem;
-    font-weight:700;
-    opacity:.9;
-    margin:0 0 .3rem;
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    font-size: .72rem;
+    font-weight: 700;
+    opacity: .9;
+    margin: 0 0 .2rem;
   }
-  h1.nome{
-    font-family:'Poppins', sans-serif;
-    font-weight:800;
+  h1.nome {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
     font-size: clamp(1.7rem, 7vw, 2.3rem);
-    margin:0;
-    line-height:1.1;
+    margin: 0;
+    line-height: 1.1;
   }
-  .subtitulo-header{
-    font-size:.9rem;
-    font-weight:600;
-    opacity:.85;
-    margin-top:-.2rem;
+  .subtitulo-header {
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: .85;
+    margin-top: -.2rem;
   }
 
-  .controle-texto{
-    display:flex;
-    gap:.35rem;
-    position:relative;
-    z-index:1;
+  .fotos-pacientes {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin: 1rem 0 .5rem;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
   }
-  .controle-texto button{
+  .foto-paciente {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    background: rgba(255,255,255,0.15);
+    padding: .3rem .8rem .3rem .3rem;
+    border-radius: 999px;
+    backdrop-filter: blur(2px);
+  }
+  .foto-paciente img {
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    object-fit: cover;
+    background: #fff;
+  }
+  .foto-paciente span {
+    font-weight: 700;
+    font-size: .95rem;
+  }
+
+  .controle-texto {
+    display: flex;
+    gap: .35rem;
+    position: relative;
+    z-index: 1;
+  }
+  .controle-texto button {
     background: rgba(255,255,255,0.16);
     border: 1.5px solid rgba(255,255,255,0.5);
-    color:#fff;
+    color: #fff;
     width: 2.5rem;
     height: 2.5rem;
     border-radius: 10px;
     font-size: 1rem;
-    font-weight:800;
-    cursor:pointer;
+    font-weight: 800;
+    cursor: pointer;
   }
-  .controle-texto button:active{ transform: scale(.94); }
+  .controle-texto button:active { transform: scale(.94); }
 
-  .status-sync{
-    display:inline-flex;
-    align-items:center;
-    gap:.4rem;
-    font-size:.8rem;
-    font-weight:700;
-    margin-top:.9rem;
-    padding:.35rem .7rem;
-    border-radius:999px;
+  .status-sync {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    font-size: .8rem;
+    font-weight: 700;
+    margin-top: .9rem;
+    padding: .35rem .7rem;
+    border-radius: 999px;
     background: rgba(255,255,255,0.16);
-    width:fit-content;
-    position:relative; z-index:1;
+    width: fit-content;
+    position: relative;
+    z-index: 1;
   }
-  .status-sync.ok::before{ content:""; width:8px;height:8px;border-radius:50%; background:#8CF0AE; display:inline-block; }
-  .status-sync.erro::before{ content:""; width:8px;height:8px;border-radius:50%; background:#FFB081; display:inline-block; }
-
-  /* Fotos dos pacientes */
-  .fotos-pacientes{
-    display:flex;
-    align-items:center;
-    gap:1.2rem;
-    margin: 1.2rem 0 .5rem;
-    flex-wrap:wrap;
-    position:relative; z-index:1;
+  .status-sync.ok::before {
+    content: "";
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #8CF0AE;
+    display: inline-block;
   }
-  .foto-paciente{
-    display:flex;
-    align-items:center;
-    gap:.5rem;
-    background: rgba(255,255,255,0.15);
-    padding: .3rem .8rem .3rem .3rem;
-    border-radius:999px;
-    backdrop-filter: blur(2px);
-  }
-  .foto-paciente img{
-    width: 2.6rem;
-    height: 2.6rem;
-    border-radius:50%;
-    border: 2px solid #fff;
-    object-fit:cover;
-    background:#fff;
-  }
-  .foto-paciente span{
-    font-weight:700;
-    font-size:.95rem;
+  .status-sync.erro::before {
+    content: "";
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #FFB081;
+    display: inline-block;
   }
 
-  .titulo-paciente{
-    display:flex;
-    align-items:center;
-    gap:.55rem;
-    font-family:'Poppins',sans-serif;
-    font-weight:800;
-    font-size: 1.2rem;
-    color: var(--texto-escuro);
-    margin: 1.9rem .2rem .9rem;
+  .barra-usuario {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .6rem;
+    margin-top: .9rem;
+    position: relative;
+    z-index: 1;
+  }
+  .email-logado {
+    font-size: .82rem;
+    font-weight: 700;
+    opacity: .9;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .btn-sair {
+    background: rgba(255,255,255,0.16);
+    border: 1.5px solid rgba(255,255,255,0.5);
+    color: #fff;
+    font-size: .82rem;
+    font-weight: 800;
+    padding: .45rem .9rem;
+    border-radius: 999px;
+    cursor: pointer;
+    flex-shrink: 0;
   }
 
-  .navegador-mes{
+  /* Navegador de mês */
+  .navegador-mes {
     margin-top: 1.1rem;
-    display:flex;
-    align-items:center;
-    gap:.5rem;
-    position:relative; z-index:1;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    position: relative;
+    z-index: 1;
   }
-  .navegador-mes button{
+  .navegador-mes button {
     background: rgba(255,255,255,0.18);
     border: 1.5px solid rgba(255,255,255,0.55);
-    color:#fff;
+    color: #fff;
     width: 2.8rem;
     height: 2.8rem;
-    min-width:2.8rem;
+    min-width: 2.8rem;
     border-radius: 12px;
     font-size: 1.3rem;
-    font-weight:800;
-    cursor:pointer;
-    display:flex; align-items:center; justify-content:center;
+    font-weight: 800;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-  .navegador-mes button:disabled{
-    opacity:.35;
-    cursor:not-allowed;
+  .navegador-mes button:disabled {
+    opacity: .35;
+    cursor: not-allowed;
   }
-  .navegador-mes select{
-    flex:1;
+  .navegador-mes select {
+    flex: 1;
     background: #fff;
     color: var(--texto-escuro);
     border: none;
     border-radius: 12px;
-    font-weight:800;
+    font-weight: 800;
     font-size: 1.05rem;
     padding: .65rem .7rem;
-    text-align:center;
-    text-align-last:center;
+    text-align: center;
+    text-align-last: center;
     box-shadow: var(--sombra);
   }
 
-  main{
-    max-width: 45rem;
+  /* Conteúdo principal */
+  main {
+    max-width: 48rem;
     margin: 0 auto;
     padding: 0 1rem;
   }
 
-  .aviso-mes-passado{
-    background:#FFF4E6;
-    border:1.5px solid #F0C089;
-    color:#6B4200;
-    font-weight:700;
-    font-size:.92rem;
-    border-radius:12px;
-    padding:.7rem .9rem;
-    margin-top:1.1rem;
-    text-align:center;
+  .aviso-mes-passado {
+    background: #FFF4E6;
+    border: 1.5px solid #F0C089;
+    color: #6B4200;
+    font-weight: 700;
+    font-size: .92rem;
+    border-radius: 12px;
+    padding: .7rem .9rem;
+    margin-top: 1.1rem;
+    text-align: center;
   }
 
-  .cartao-hoje{
+  .cartao-hoje {
     background: var(--branco);
-    border: 2.5px solid var(--azul-medio);
+    border: 2.5px solid var(--rosa-medio);
     border-radius: var(--raio);
     box-shadow: var(--sombra);
     margin-top: 1.1rem;
     padding: 1rem 1.2rem;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     gap: .7rem;
     flex-wrap: wrap;
   }
-  .cartao-hoje .rotulo{
-    font-size:.72rem;
-    font-weight:800;
-    letter-spacing:.1em;
-    text-transform:uppercase;
-    color: var(--azul-medio);
-    margin:0 0 .25rem;
+  .cartao-hoje .rotulo {
+    font-size: .72rem;
+    font-weight: 800;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--rosa-medio);
+    margin: 0 0 .25rem;
   }
-  .cartao-hoje .data-grande{
-    font-family:'Poppins',sans-serif;
-    font-weight:700;
+  .cartao-hoje .data-grande {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
     font-size: 1.2rem;
-    margin:0;
+    margin: 0;
     color: var(--texto-escuro);
   }
-  .pulso{
-    width:.8rem;height:.8rem;border-radius:50%;
-    background: var(--azul-medio);
-    box-shadow: 0 0 0 0 rgba(21,80,196,.6);
+  .pulso {
+    width: .8rem; height: .8rem;
+    border-radius: 50%;
+    background: var(--rosa-medio);
+    box-shadow: 0 0 0 0 rgba(219,39,119,.6);
     animation: pulsar 2s infinite;
-    flex-shrink:0;
+    flex-shrink: 0;
   }
-  @keyframes pulsar{
-    0%{box-shadow:0 0 0 0 rgba(21,80,196,.55);}
-    70%{box-shadow:0 0 0 14px rgba(21,80,196,0);}
-    100%{box-shadow:0 0 0 0 rgba(21,80,196,0);}
-  }
-
-  .secao-titulo{
-    margin: 1.7rem .25rem .8rem;
-    font-family:'Poppins',sans-serif;
-    font-weight:800;
-    font-size: 1rem;
-    color: var(--azul-escuro);
-    text-transform:uppercase;
-    letter-spacing:.05em;
+  @keyframes pulsar {
+    0% { box-shadow: 0 0 0 0 rgba(219,39,119,.6); }
+    70% { box-shadow: 0 0 0 14px rgba(219,39,119,0); }
+    100% { box-shadow: 0 0 0 0 rgba(219,39,119,0); }
   }
 
-  .lista-dias{
-    display:flex;
-    flex-direction:column;
-    gap: .85rem;
+  /* Lista de dias */
+  .lista-dias {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1.5rem;
   }
 
-  .linha-dia{
+  .linha-dia {
     background: var(--branco);
-    border-radius: 16px;
-    border: 1.5px solid var(--azul-claro-2);
+    border-radius: var(--raio);
+    border: 1.5px solid var(--rosa-claro2);
     padding: 1rem 1.1rem;
-    display:grid;
-    grid-template-columns: 1fr;
-    gap: .75rem;
+    box-shadow: 0 2px 8px rgba(157,23,77,0.06);
     transition: border-color .2s, box-shadow .2s;
   }
-  .linha-dia.hoje{
-    border-color: var(--azul-medio);
-    box-shadow: 0 0 0 4px rgba(21,80,196,0.15);
-    background: linear-gradient(180deg,#FFFFFF, #F3F8FF);
+  .linha-dia.hoje {
+    border-color: var(--rosa-medio);
+    box-shadow: 0 0 0 4px rgba(219,39,119,0.12);
+    background: linear-gradient(180deg, #FFFFFF, #FFF0F6);
   }
-  .linha-dia.falta-jose, .linha-dia.falta-cirene{
+  .linha-dia.falta-jose, .linha-dia.falta-cirene {
     background: var(--alerta-bg);
     border-color: #E0A868;
   }
 
-  .linha-cabeca{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:.6rem;
-    flex-wrap:wrap;
+  .linha-cabeca {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .6rem;
+    flex-wrap: wrap;
+    margin-bottom: .6rem;
   }
-  .dia-semana{
-    font-weight:800;
-    font-size: 1.08rem;
-    color: var(--texto-escuro);
+  .dia-semana {
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--rosa-escuro);
   }
-  .dia-numero{
-    font-size: .95rem;
-    color:#3D4C6B;
-    font-weight:600;
-  }
-  .tag-hoje{
-    background: var(--azul-medio);
-    color:#fff;
-    font-size:.7rem;
-    font-weight:800;
-    letter-spacing:.06em;
-    text-transform:uppercase;
-    padding: .25rem .55rem;
-    border-radius:999px;
-  }
-
-  .grid-pacientes{
-    display:grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    margin-top:.3rem;
-  }
-  .paciente-coluna{
-    background: #FBFDFF;
-    border-radius:12px;
-    padding: .7rem .8rem;
-    border:1px solid var(--azul-claro-2);
-  }
-  .paciente-coluna .nome-coluna{
-    font-weight:800;
-    font-size:.9rem;
-    color: var(--azul-escuro);
-    margin:0 0 .5rem;
-    display:flex;
-    align-items:center;
-    gap:.4rem;
-  }
-  .paciente-coluna .nome-coluna .mini-foto{
-    width:1.6rem;
-    height:1.6rem;
-    border-radius:50%;
-    object-fit:cover;
-    background:#ddd;
-    border:1px solid var(--azul-claro-2);
-  }
-
-  .campos{
-    display:grid;
-    grid-template-columns: 1fr 1fr;
-    gap: .7rem;
-  }
-  .campo label{
-    display:block;
-    font-size: .78rem;
-    font-weight:700;
-    color:#3D4C6B;
-    text-transform:uppercase;
-    letter-spacing:.04em;
-    margin-bottom:.3rem;
-  }
-  .campo input[type="time"]{
-    width:100%;
-    padding: .7rem .6rem;
-    border-radius:10px;
-    border:2px solid var(--azul-claro-2);
-    font-size: 1.15rem;
-    font-weight:600;
-    font-family:'Inter',sans-serif;
-    color: var(--texto-escuro);
-    background:#FBFDFF;
-    min-height: 3rem;
-  }
-  .campo input[type="time"]:disabled{
-    opacity:.55;
-    background:#EDEDED;
-  }
-  .campo input[type="time"]:focus{
-    outline:none;
-    border-color: var(--azul-medio);
-    box-shadow: 0 0 0 4px rgba(21,80,196,.2);
-  }
-
-  .campo-observacao{
-    grid-column: 1 / -1;
-  }
-  .campo-observacao label{
-    display:block;
-    font-size: .78rem;
-    font-weight:700;
-    color:#3D4C6B;
-    text-transform:uppercase;
-    letter-spacing:.04em;
-    margin-bottom:.3rem;
-  }
-  .campo-observacao textarea{
-    width:100%;
-    padding: .65rem .7rem;
-    border-radius:10px;
-    border:2px solid var(--azul-claro-2);
-    font-size: .98rem;
-    font-family:'Inter',sans-serif;
-    color: var(--texto-escuro);
-    background:#FBFDFF;
-    min-height: 3.6rem;
-    resize:vertical;
-  }
-  .campo-observacao textarea:focus{
-    outline:none;
-    border-color: var(--azul-medio);
-    box-shadow: 0 0 0 4px rgba(219,39,119,.18);
-  }
-  .campo-observacao textarea::placeholder{ color:#9AA5BD; }
-
-  .falta-toggle{
-    display:flex;
-    align-items:center;
-    gap:.5rem;
-    font-size: .98rem;
-    font-weight:700;
-    color: var(--alerta);
-    cursor:pointer;
-    user-select:none;
-    min-height: 2.75rem;
-  }
-  .falta-toggle input{
-    width: 1.6rem;
-    height: 1.6rem;
-    accent-color: var(--alerta);
-    cursor:pointer;
-  }
-
-  .horas-dia{
-    font-size: .95rem;
-    font-weight:800;
-    color: var(--azul-escuro);
-    background: var(--azul-claro);
-    padding: .4rem .8rem;
+  .dia-numero {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #6B2A4A;
+    background: var(--rosa-claro);
+    padding: .1rem .7rem;
     border-radius: 999px;
   }
-  .horas-dia.vazio{
-    color:#5C6B8A;
-    background:#EEF2F8;
+  .tag-hoje {
+    background: var(--rosa-medio);
+    color: #fff;
+    font-size: .7rem;
+    font-weight: 800;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: .25rem .6rem;
+    border-radius: 999px;
   }
 
-  .resumo-duplo{
-    display:grid;
+  /* Campos de horário (compartilhados) */
+  .campos-horarios {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .7rem;
+    margin-bottom: .7rem;
+  }
+  .campo label {
+    display: block;
+    font-size: .78rem;
+    font-weight: 700;
+    color: #5C3B4A;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    margin-bottom: .25rem;
+  }
+  .campo input[type="time"] {
+    width: 100%;
+    padding: .6rem .5rem;
+    border-radius: 10px;
+    border: 2px solid var(--rosa-claro2);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--texto-escuro);
+    background: #FFFBFD;
+    min-height: 2.8rem;
+  }
+  .campo input[type="time"]:disabled {
+    opacity: .5;
+    background: #F0E8EC;
+  }
+  .campo input[type="time"]:focus {
+    outline: none;
+    border-color: var(--rosa-medio);
+    box-shadow: 0 0 0 4px rgba(219,39,119,.15);
+  }
+
+  /* Grid de pacientes */
+  .grid-pacientes {
+    display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
-    margin-top: 1.7rem;
+    margin: .5rem 0 .3rem;
   }
-  .resumo-individual{
-    background: linear-gradient(135deg, var(--azul-escuro), var(--azul-medio));
+  .paciente-coluna {
+    background: #FFF8FA;
+    border-radius: 12px;
+    padding: .7rem .8rem;
+    border: 1px solid var(--rosa-claro);
+  }
+  .paciente-coluna .nome-coluna {
+    font-weight: 800;
+    font-size: .95rem;
+    color: var(--rosa-escuro);
+    margin: 0 0 .4rem;
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+  }
+  .paciente-coluna .nome-coluna .mini-foto {
+    width: 1.8rem;
+    height: 1.8rem;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #ddd;
+    border: 1px solid var(--rosa-claro2);
+  }
+
+  .campo-observacao {
+    margin: .4rem 0 .3rem;
+  }
+  .campo-observacao label {
+    display: block;
+    font-size: .72rem;
+    font-weight: 700;
+    color: #5C3B4A;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    margin-bottom: .2rem;
+  }
+  .campo-observacao textarea {
+    width: 100%;
+    padding: .5rem .6rem;
+    border-radius: 8px;
+    border: 1.5px solid var(--rosa-claro2);
+    font-size: .9rem;
+    background: #FFFBFD;
+    min-height: 2.8rem;
+    resize: vertical;
+  }
+  .campo-observacao textarea:focus {
+    outline: none;
+    border-color: var(--rosa-medio);
+    box-shadow: 0 0 0 3px rgba(219,39,119,.12);
+  }
+
+  .falta-toggle {
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    font-size: .9rem;
+    font-weight: 700;
+    color: var(--alerta);
+    cursor: pointer;
+    user-select: none;
+    margin-top: .3rem;
+  }
+  .falta-toggle input {
+    width: 1.5rem;
+    height: 1.5rem;
+    accent-color: var(--alerta);
+    cursor: pointer;
+  }
+
+  .horas-dia {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--rosa-escuro);
+    background: var(--rosa-claro);
+    padding: .3rem .8rem;
+    border-radius: 999px;
+    display: inline-block;
+  }
+  .horas-dia.vazio {
+    color: #5C3B4A;
+    background: #F0E8EC;
+  }
+  .rodape-linha {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: .3rem;
+  }
+
+  /* Resumos individuais */
+  .resumo-duplo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .resumo-individual {
+    background: linear-gradient(135deg, var(--rosa-escuro), var(--rosa-medio));
     color: var(--texto-claro);
     border-radius: 18px;
-    padding: 1.2rem;
+    padding: 1rem 1rem;
     box-shadow: var(--sombra);
-    display:grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: .5rem;
-    text-align:center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: .3rem;
+    text-align: center;
   }
-  .resumo-individual .titulo-resumo{
+  .resumo-individual .titulo-resumo {
     grid-column: 1 / -1;
-    font-weight:800;
-    font-size:1rem;
-    margin:0 0 .2rem;
-    opacity:.9;
-    text-transform:uppercase;
-    letter-spacing:.05em;
+    font-weight: 800;
+    font-size: 1rem;
+    margin: 0 0 .2rem;
+    opacity: .9;
+    text-transform: uppercase;
+    letter-spacing: .05em;
   }
-  .resumo-individual .item .valor{
-    font-family:'Poppins',sans-serif;
-    font-weight:800;
+  .resumo-individual .item .valor {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
     font-size: 1.4rem;
-    display:block;
+    display: block;
   }
-  .resumo-individual .item .rotulo{
+  .resumo-individual .item .rotulo {
     font-size: .7rem;
-    text-transform:uppercase;
-    letter-spacing:.05em;
-    opacity:.9;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    opacity: .9;
   }
 
-  .acoes{
-    display:flex;
-    justify-content:center;
-    gap:1rem;
-    margin-top: 1.1rem;
-    flex-wrap:wrap;
+  .acoes {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
   }
-  .btn-limpar{
-    background:#fff;
-    border: 2px solid #C7D6ED;
-    color:#3D4C6B;
+  .btn-limpar {
+    background: #fff;
+    border: 2px solid #D4B8C8;
+    color: #5C3B4A;
     font-size: .95rem;
-    font-weight:700;
-    padding: .7rem 1.2rem;
-    border-radius:999px;
-    cursor:pointer;
-    min-height: 2.9rem;
+    font-weight: 700;
+    padding: .6rem 1.4rem;
+    border-radius: 999px;
+    cursor: pointer;
   }
-  .btn-limpar:active{ transform: scale(.97); }
+  .btn-limpar:active { transform: scale(.97); }
 
-  .painel-financeiro{
+  /* Painel financeiro */
+  .painel-financeiro {
     background: var(--branco);
-    border: 2px solid var(--azul-claro-2);
+    border: 2px solid var(--rosa-claro2);
     border-radius: var(--raio);
     box-shadow: var(--sombra);
-    margin-top: 1.5rem;
+    margin-top: 2rem;
     padding: 1.2rem 1.3rem;
   }
-  .painel-financeiro h2{
-    font-family:'Poppins',sans-serif;
-    font-weight:800;
-    font-size: 1.05rem;
-    color: var(--azul-escuro);
+  .painel-financeiro h2 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--rosa-escuro);
     margin: 0 0 1rem;
   }
-  .financeiro-grade{
-    display:grid;
+  .financeiro-grade {
+    display: grid;
     grid-template-columns: 1fr 1fr;
     gap: .8rem;
     margin-bottom: 1rem;
   }
-  .financeiro-item{
-    background: var(--azul-claro);
+  .financeiro-item {
+    background: var(--rosa-claro);
     border-radius: 12px;
     padding: .8rem .9rem;
-    text-align:center;
+    text-align: center;
   }
-  .financeiro-item .valor{
-    display:block;
-    font-family:'Poppins',sans-serif;
-    font-weight:800;
+  .financeiro-item .valor {
+    display: block;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
     font-size: 1.15rem;
-    color: var(--azul-escuro);
+    color: var(--rosa-escuro);
   }
-  .financeiro-item .rotulo{
-    font-size:.72rem;
-    font-weight:700;
-    color:#5C6B8A;
-    text-transform:uppercase;
-    letter-spacing:.04em;
+  .financeiro-item .rotulo {
+    font-size: .72rem;
+    font-weight: 700;
+    color: #5C3B4A;
+    text-transform: uppercase;
+    letter-spacing: .04em;
   }
-  .financeiro-progresso{
-    background:#F3F5F9;
-    border-radius:999px;
+  .financeiro-progresso {
+    background: #F3E8EE;
+    border-radius: 999px;
     height: .8rem;
-    overflow:hidden;
-    margin-bottom:.4rem;
+    overflow: hidden;
+    margin-bottom: .4rem;
   }
-  .financeiro-progresso-barra{
-    height:100%;
-    background: linear-gradient(90deg, var(--azul-escuro), var(--azul-medio));
-    border-radius:999px;
+  .financeiro-progresso-barra {
+    height: 100%;
+    background: linear-gradient(90deg, var(--rosa-escuro), var(--rosa-medio));
+    border-radius: 999px;
     transition: width .3s;
   }
-  .financeiro-legenda{
-    font-size:.84rem;
-    color:#5C6B8A;
-    font-weight:600;
-    text-align:center;
+  .financeiro-legenda {
+    font-size: .84rem;
+    color: #5C3B4A;
+    font-weight: 600;
+    text-align: center;
     margin: 0 0 1rem;
   }
-  .btn-atualizar-financeiro{
-    display:block;
+  .btn-atualizar-financeiro {
+    display: block;
     margin: 0 auto 1rem;
-    background:#fff;
-    border: 2px solid #C7D6ED;
-    color:#3D4C6B;
-    font-size:.88rem;
-    font-weight:700;
-    padding: .6rem 1.1rem;
-    border-radius:999px;
-    cursor:pointer;
+    background: #fff;
+    border: 2px solid #D4B8C8;
+    color: #5C3B4A;
+    font-size: .88rem;
+    font-weight: 700;
+    padding: .5rem 1.2rem;
+    border-radius: 999px;
+    cursor: pointer;
   }
-  .lista-pacotes{
-    display:flex;
-    flex-direction:column;
-    gap:.5rem;
+  .lista-pacotes {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
   }
-  .pacote-item{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:.6rem;
-    background:#FBFDFF;
-    border:1.5px solid var(--azul-claro-2);
-    border-radius:10px;
-    padding:.6rem .8rem;
+  .pacote-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .6rem;
+    background: #FFFBFD;
+    border: 1.5px solid var(--rosa-claro2);
+    border-radius: 10px;
+    padding: .6rem .8rem;
   }
-  .pacote-item.pago{
-    background:#F0FBF3;
-    border-color:#8CDDA6;
+  .pacote-item.pago {
+    background: #F0FBF3;
+    border-color: #8CDDA6;
   }
-  .pacote-item span.pacote-nome{
-    font-weight:700;
-    font-size:.92rem;
+  .pacote-item span.pacote-nome {
+    font-weight: 700;
+    font-size: .92rem;
     color: var(--texto-escuro);
   }
-  .pacote-item label{
-    display:flex;
-    align-items:center;
-    gap:.4rem;
-    font-size:.85rem;
-    font-weight:700;
-    color:#3D4C6B;
-    cursor:pointer;
+  .pacote-item label {
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    font-size: .85rem;
+    font-weight: 700;
+    color: #5C3B4A;
+    cursor: pointer;
   }
-  .pacote-item input[type="checkbox"]{
-    width:1.3rem;
-    height:1.3rem;
+  .pacote-item input[type="checkbox"] {
+    width: 1.3rem;
+    height: 1.3rem;
     accent-color: #2E9B54;
-    cursor:pointer;
+    cursor: pointer;
   }
 
-  footer.rodape-app{
-    text-align:center;
+  footer.rodape-app {
+    text-align: center;
     font-size: .82rem;
-    color:#4C5B7A;
-    margin-top: 1.7rem;
+    color: #6B4A5A;
+    margin-top: 2rem;
     padding: 0 1.2rem;
-    line-height:1.5;
-  }
-
-  @media (max-width: 34rem){
-    .grid-pacientes{
-      grid-template-columns: 1fr;
-    }
-    .resumo-duplo{
-      grid-template-columns: 1fr;
-    }
-    .fotos-pacientes{
-      gap:.8rem;
-    }
-  }
-  @media (min-width: 34rem){
-    .linha-dia{
-      grid-template-columns: 1fr;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    .pulso{ animation:none; }
   }
 
   /* Tela de login */
-  .tela-login{
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+  .tela-login {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 1.5rem;
-    background: linear-gradient(180deg, var(--azul-claro) 0%, #FFF0F6 40%, #FFF8FB 100%);
+    background: linear-gradient(180deg, var(--rosa-claro) 0%, #FFF0F6 40%, #FFF8FB 100%);
   }
-  .cartao-login{
-    background:#fff;
+  .cartao-login {
+    background: #fff;
     border-radius: 22px;
     box-shadow: var(--sombra);
     padding: 2rem 1.6rem;
     max-width: 24rem;
-    width:100%;
+    width: 100%;
   }
-  .cartao-login .eyebrow-login{
-    text-transform:uppercase;
-    letter-spacing:.1em;
-    font-size:.72rem;
-    font-weight:700;
-    color: var(--azul-medio);
-    margin:0 0 .3rem;
-    text-align:center;
+  .cartao-login .eyebrow-login {
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    font-size: .72rem;
+    font-weight: 700;
+    color: var(--rosa-medio);
+    margin: 0 0 .3rem;
+    text-align: center;
   }
-  .cartao-login h1{
-    font-family:'Poppins',sans-serif;
-    font-weight:800;
+  .cartao-login h1 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
     font-size: 1.5rem;
-    text-align:center;
+    text-align: center;
     margin: 0 0 1.4rem;
     color: var(--texto-escuro);
   }
-  .campo-login{ margin-bottom: 1rem; }
-  .campo-login label{
-    display:block;
-    font-size:.8rem;
-    font-weight:700;
-    color:#3D4C6B;
-    margin-bottom:.35rem;
+  .campo-login { margin-bottom: 1rem; }
+  .campo-login label {
+    display: block;
+    font-size: .8rem;
+    font-weight: 700;
+    color: #5C3B4A;
+    margin-bottom: .35rem;
   }
-  .campo-login input{
-    width:100%;
-    padding:.8rem .8rem;
-    border-radius:12px;
-    border:2px solid var(--azul-claro-2);
-    font-size:1.05rem;
-    font-family:'Inter',sans-serif;
-    background:#FBFDFF;
+  .campo-login input {
+    width: 100%;
+    padding: .8rem .8rem;
+    border-radius: 12px;
+    border: 2px solid var(--rosa-claro2);
+    font-size: 1.05rem;
+    background: #FFFBFD;
     min-height: 3rem;
   }
-  .campo-login input:focus{
-    outline:none;
-    border-color: var(--azul-medio);
+  .campo-login input:focus {
+    outline: none;
+    border-color: var(--rosa-medio);
     box-shadow: 0 0 0 4px rgba(219,39,119,.18);
   }
-  .btn-entrar{
-    width:100%;
-    background: linear-gradient(135deg, var(--azul-escuro), var(--azul-medio));
-    color:#fff;
-    border:none;
-    border-radius:999px;
-    font-weight:800;
-    font-size:1.05rem;
+  .btn-entrar {
+    width: 100%;
+    background: linear-gradient(135deg, var(--rosa-escuro), var(--rosa-medio));
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 1.05rem;
     padding: .85rem;
-    cursor:pointer;
+    cursor: pointer;
     min-height: 3.1rem;
-    margin-top:.4rem;
+    margin-top: .4rem;
   }
-  .btn-entrar:active{ transform: scale(.98); }
-  .btn-entrar:disabled{ opacity:.6; cursor:not-allowed; }
-  .link-esqueci{
-    display:block;
-    text-align:center;
+  .btn-entrar:active { transform: scale(.98); }
+  .btn-entrar:disabled { opacity: .6; cursor: not-allowed; }
+  .link-esqueci {
+    display: block;
+    text-align: center;
     margin-top: 1rem;
-    font-size:.88rem;
-    font-weight:700;
-    color: var(--azul-medio);
-    background:none;
-    border:none;
-    cursor:pointer;
-    text-decoration:underline;
+    font-size: .88rem;
+    font-weight: 700;
+    color: var(--rosa-medio);
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
   }
-  .erro-login{
+  .erro-login {
     background: var(--alerta-bg);
     color: var(--alerta);
-    font-size:.88rem;
-    font-weight:700;
-    border-radius:10px;
-    padding:.65rem .8rem;
-    margin-bottom:1rem;
-    text-align:center;
+    font-size: .88rem;
+    font-weight: 700;
+    border-radius: 10px;
+    padding: .65rem .8rem;
+    margin-bottom: 1rem;
+    text-align: center;
   }
-  .erro-login:empty{ display:none; }
+  .erro-login:empty { display: none; }
 
-  .barra-usuario{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:.6rem;
-    margin-top: .9rem;
-    position:relative; z-index:1;
-  }
-  .email-logado{
-    font-size:.82rem;
-    font-weight:700;
-    opacity:.9;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
-  }
-  .btn-sair{
-    background: rgba(255,255,255,0.16);
-    border: 1.5px solid rgba(255,255,255,0.5);
-    color:#fff;
-    font-size:.82rem;
-    font-weight:800;
-    padding: .45rem .9rem;
-    border-radius: 999px;
-    cursor:pointer;
-    flex-shrink:0;
-  }
+  .escondido { display: none !important; }
 
-  .escondido{ display:none !important; }
+  /* Responsividade */
+  @media (max-width: 34rem) {
+    .grid-pacientes { grid-template-columns: 1fr; }
+    .resumo-duplo { grid-template-columns: 1fr; }
+    .fotos-pacientes { gap: .8rem; }
+    .campos-horarios { grid-template-columns: 1fr; }
+    .dia-semana { font-size: 1rem; }
+    .dia-numero { font-size: .95rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { .pulso { animation: none; } }
 </style>
 </head>
 <body>
 
+<!-- Tela de login -->
 <div id="telaLogin" class="tela-login">
   <div class="cartao-login">
     <p class="eyebrow-login">Acesso restrito</p>
@@ -818,6 +812,7 @@
   </div>
 </div>
 
+<!-- Conteúdo principal (só aparece após login) -->
 <div id="appConteudo" class="escondido">
 
 <header class="topo">
@@ -833,14 +828,16 @@
     </div>
   </div>
 
-  <!-- Fotos dos pacientes -->
+  <!-- Fotos dos pacientes (somente aqui, não se repetem) -->
   <div class="fotos-pacientes">
     <div class="foto-paciente">
-      <img src="https://via.placeholder.com/100/9D174D/FFFFFF?text=José" alt="Foto de José" id="fotoJose">
+      <!-- Substitua o src pelo link da foto real de José -->
+      <img src="https://th.bing.com/th/id/OIP.g6P-TK9IsY8QCl1rMqp_PwHaHa?w=168&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3" alt="Foto de José" id="fotoJose">
       <span>José</span>
     </div>
     <div class="foto-paciente">
-      <img src="https://via.placeholder.com/100/DB2777/FFFFFF?text=Cirene" alt="Foto de Cirene" id="fotoCirene">
+      <!-- Substitua o src pelo link da foto real de Cirene -->
+      <img src="data:image/webp;base64,UklGRrYbAABXRUJQVlA4IKobAADwggCdASojASQBPp1In0ulpCahp1MqUNATiWVu4Wxg5lT8xKR/lHxAB/d5vfenbcO87Pp4W9VWoPy4xg9N4m5x3ZR/x/COaA237//oZzmPtxkmPHf7HlF/Z/91/7v9P8Cn7D+nT7Ov3I9k/9ey31IQ4NiUvgLNchGmb9XVnsapWq003kDfFO4/rvYXmKfyOmPR75xJ/3eQQHG1kNMJtQZiNh709onGzPI12xKiEbA+lZSB35x/Fwbw9rTbmQP6sgg3awC3Cx2pWO8HwltAm3RVHh1VZgph+nezVMYXVgnBI2ceILLoV/KPm2Fuz2NUZcIP5RDxIxqfgU4TRXFUVZiaDZdJQ6QHsiuUyy918H+NempIjdnDc1IWOyFnJgBnh3fxfQKzhFuogpJ6vG0M7e5vq2xqlKrfUOLY0KSmHHtzeLTBuXWKXrzKrThVZDS2cAX+6EbdKU1DhIi4OK07N0WuTGjNHqvfl5PUUnRY8DSCDub2gCzzzPDrTnS67budsLWh0XPMpD5MB5Gk+zvZ9hvp2WSfIsQNbfx/M9/o3WefVSNzsFmoTVtOMlvjLnEcmyBhAWeIhGCh9qbOJpVroPp/16ykyrDCVQdotM+FGk+6uHdD7+PGEN9hqvRk6TyAS967g2JTvAqGuqj0wTU2PuU+p6CYTurCxH5VTReX3VLjR9mDwwa/t18OoYkk3fWgWH7zSPKEeuwejPUHuh7lCmNFCCgtpKuoTBsSndPJKFBFgIj+j+MRXZxOAzCASzLLedIZfxpwW7s3uQtT0pNCUGptfqYlqcoNdmSX79/cn7uEXHYGAC5m7YlQHCeMdxlOfpXuESHZeDVtGqHA5YpOeGzUooDWEalCsna+b7d79yJwQ5aruZcLxepkUOCQIfEcvH95q927eDnqQQyy06dj7/VLWlwAKMY5Z7uTS+r7dw6CKoqNFbBzCIH1cFCwLNIhoQYck1HN56h8qqQ/Mvv3oJqfjnqQgvxBXGBcpxhSA7gDfj9WR5FgakjeswobgoC2KvcZPkF+/ngftOjpql1Z7GqVtFzCzkfVguh4CUic2vsmvtUPencAiEijyOepCGzqr4PnJRUvMg2PpRIrZ1iICDUo+2HkVvfnCKqRz1IQb44jeqE7gZDLzwKSW5d66q/oLwvRHNtHJmuGxnsQ4NiVEKL68DliR+U4qb+wvRapnysYFjBSHM03HJ+6DUdOSocjt8vNjVK2ihsJuGLVLfjgG2qIzLtXhmlFQyFr3vSbypVyeSgq+em/TOHAvZC16NtpWY9h5EVAexqlbREwNZ9P1T0NZGwKqxlFIGDsfZTf8kGlYgoyifUvo8CD/e+f3I4LKDcQdxwPrfhxVIQ4NiTPlGZ24jnE5DgklaIbkKycb6gm26CpPhHMRARMmCAL3yODSAAA/v4XOAgFp/xJgpHLR2MGAg2ckgfgCmci1dp21UDH+Csa5l8YKEqS24VC/3o6JRPKx0UUlS4k+F9sjZmrR1rTx9LwdMKRI0Tzuvtv2BiTaSWNfUoIvb1dNKKWT2GG6aZErcSbgf4oLxrADBeZIy8NZ0Zrb+osINd1eGVE8kmcEnlkGmuo/XKfpMLYF3155SAd9RilzIpYANj1ngUWOfaHF3yFFElN+sldGgyDEsi3jHyg+GZLXsXUirEWiTFEfXL8+rmXTFnHQGwKFZl+mJwEhVvk6GoAyDB47sJS04V4ZvNrmVAVmiwxtUbjN7IpnxRpyB3wg4EYeJoCPAwYppI+/cQgGIrlcfn2s++107HAlZnlOCKSZK2wpOftSq4ZiYZ75xqQiAO0GzjSxZFjJxF2JqbuOqFmii6Ba7Lddf2XHkf7b6bJL85+TOOUEcLds/ewuQqAAjS+OrW5S3ORzjI+8XUVfHDE6RItU7Zo2/06KOjWG/3x+ouHhnSq8+MpMKqYEJ5Nl4a59kcNk5qVdcAtvD1bkdmhxQVXDRjh3BWAf6DQ6FeqmXBUH0JGxzHMtbmW0cCzv2zbNcSd1IWD1Tukv6wEa9z2raD2+CHjFVQXC3jhcdU+OzP8GlJLd7iDSJGaVYGusoHkhlvW5OMRDD365oBdXJn5a79TmP4jO2nK4meoxrX2lhee4MZlUvcp4xHGjLq/adKyF41CCZxtJzt0++2pe9fQVi+0n4sjPSR8wqShBJYmLvi06b61pZ/j4QS5jX4WfJ1K5irXbeK/iTntcCZVjHDX4+2998OX87wlCtvPsD6944TDi08BYU7mnmg62QTtHqg5AM2eB8jqScvanmdk3lVihgAOvWBcyNHzNqql6klgQNg2wp02xO8/sFoDtGUt9YntSiJyS/hzy397EhnTJWlxC9MAyooUVs+v8MGGDLzUo1dq1dQF5yV3tk+CyueA6VXKRr/lLGulCFh5hjipYwgfIkHm6Y6qTh3QQL0FEMqBVCCypfidJtLrcEasub9YEcXM4DpiBjdr8g0UHsRMlmdsl/ZGpY8I3LyIrqNP7zrqL5SF6qwKWIB/TTx3+VCclQutxfPYZLklU3t6d556+UsdfJg2gKYOg5vWXgKGqjnB8queU9+kMlKcbN7XToGe4A8JMwNDYBVj5uHuZFA+QuZ9WeuGa8yhV7cr/lpSUzWJrS8vUvPzSbOwNueq9HtVk+/a/Byn1P8mmyLRTMOb/KN7cUCr7aSel9XAtnaOUHejzW4PWX4L0KxMTpbVdPjc6pc3HitDSAe74pUix016UTwhcNXRhWoHPss42/Huqwd+kfD9OfSh+fp1Sz0tx3crpN3eDZBCm1sLt8wcnMobKcscB9YeJyGKu93tcyX7uaOS9Y6WlDGO+BZNUtRRZhSyHbpH0LN0IcHU3ucTBPNYh3k0K81o0XIT1V/TCeAQE1qieZWod7suVwMc8oTsWGfaiawpsTHa53VqHEvdOblrQYrmsQIoJxhuvPS4xWBNl14X06QGQU/666l7pS2FCKR/izedPuYPXxDoMsyaQCloGn65yTcEgve8yiF6d4+CQdVJpN6cPlbfr4J71N58deo0lEry3sepLl24ivJ/WP38B18+g88LAcI34sDa59B+28hsinv1ps20mqMfXGwnix/2sCgINXrPkfjfdzPvdDWOF/UMH3ehkFI+ID2DSNIqri7OKbFCnaxMaQHY/AhYjJFFWJgGstoYFQHi1Iv88yuffKMMeHv4AXOnYZ/F/4Yo0nuBFU4YeEgGo8qReGM2i32pUVaW5eHWJjYhuKGix6GTaKMS/LrkReHOenJC6iaoLDNol1/chx/999yzHv1eGpZu6VlxfiCZyonm7n2o7QQVOGr4MCRDCXUWGU8lzxX4XgLJiUkEYkDU9phqfEy416n1ZLc4agZGAtRkprmq6+r7/W02wd8huHym9NOF+F+whMX3cB0vrPy87e8vD2L1d/W20PkzsQlkegC7UN13oLQG2sm1S9dOeo0bVtAAIKyqE0F+CyiK5eUCdeZI5Twk6U3r/gi2vvuUlncprxv18VDZU3zgdtiR2yS+loPzMNnfhtxVJ5M5PoDhl9b2TFhp/KbrWAWq2YTdcOkmzLgzm60CU+fI78MWV6hf/5+/Vrn+hbD84zgBLCTViGcR76MKrHjqwgErand1JDxe+EllnMrTj9VFT8zMoo+vffngt3ZeGa4t7ZTDBkt1nD23iR51HvYhtVx4LCSqevGrOB3VCB8Ym9LO2gYr7Dut8JpceYXIek4GBx/Z795h2k2raM2jcFObQiiySzj9weXudYKmGi3H3q6Y77VAtAMqoODw61863jEZfNzN5/+iTpDp02uSRiH9d5V7AYr/eU4sK+3ExKCDKVOeMwH+1zPN5ghkL+9EwsERBc3+nxELZ9RXMzOmn1wZYx53CjClbf3Tc0dG8jbQSb03+f83oW9G7PW8RkLYTwZuoPjMpow50bl5oGPZZG7fG3wKYfKkLeFxpjHSZf5kHGrxGdPUR50M6QBaNcK0Nqbfrz7MNd0BELxOYoA1dwfjUUn0Etd81BZWNic+D3vdCkMqS40bwL4BnvCWI4v8l7RAuNYfMhRnW1ztU1+qsu+r0JdhMvDf/BNEZ6ND6ZNzs3IXPpNUu7CvVhx1b15S4EUD+P5E3FvwtWANW22Tjd8DcLwEsXuOEnBnInmLNjbdt9Ft+Bz7l3pX/Zilznq1ji4dpU/RoE1dAVTnwG60TEkuMayLL8HdjZjnMemf6D+KaWOFlsELIBCKbdJny6pnAulIq/w7HSXbHszYOv9byO3BvjinfWWBQpffGuyb5NNQCruMXdSWguQgTI6oXcJA/e11Oz5TI1rLndEJRIYJq9BcHPhkR3a6wlQg+i0okuqqh2opvpfZmUmZ5DtA9y9avCadts66Hz/avUGr4LqlmJogsZFqGseNTsSR3cTAKU4VnPesWF4YjWUrd/A45nzYDmXRk4kUWK1ynLqPN37fdoROXFbXUql8Qkre0E3Oya7u9FUC69Scou8SRdV8fTFbgnqluDHIRbdxm6AKNUipLB6Hit9OvP9w3OKoV3SBFDMuLfLScgiNyCat7tvE/QxRfUTZuC0payP2wlJMDUui068n2kbICOeEm46rJ8aQ9acojwokAPq3IEk7PwsNo3gqPZoSsqj3U/mY58H/E2Ya+bdeoYJjgDZzztn1RBFYyYHuVXce/dGYs/1HndxNT/FF2XxczPWmGYN9RuAtcPIazvi78svniXbFWrSdbzO0Xo3yd8oyUShHRdTvYEV9FnnOh/Ah0VA+SkizgTHWftYcE5VWPTTnY4R2YXQLYJkxMl2cHt87fJtW1+wtbF/hXF4F9znEgIAJsUqDFZkkCkmgkrw1hszfmvsmN8eTVmq5YjQNk559KAIfkD8hNuKqPpb/xg3oRlNeP7U0/6PfmDDxboia21etaTEnVrW3gn3M3rHSgCLKW3jd302E4YLO7b8E+Gu+ejrTEQ3egAa9peaf0aLz5/L3NZRI3tQvFQmeoJ6nVxiyWEz0ncmNZef+XnKPM2DKZQaFP/XARaTw9jgnjCeUU4X8xVP+AsBsVBM5ls1b3/ygIU+OfJcnOUBXff5bljbzgqtOYRV5NgESlMGTr3el1wxFsKanz/hfVJ2Qx2zC9Drr5tCZ00c6Pkd7RgseD6Qud/leXUutYvsU/WaNLejc8dH684kzou+rrBWYHuHijUi9FRclCfJ1X9ISn0eb4AeCt59d1PABLbcOnC+wEvofZsFnR356AJSYmiGHkf3mGV/gV+3gdkO7QCgl8omWVVgFzeYIGXKswwDG+Yv/zjfBYdJduLjNs/X3zg4NWUG/VClyoxICxXZtLPvYWAgtC8C7K2jK3FPYEKZfT+ag16c394ze3JXocB/AiQ8GRK7vz7khWiCXnMJHdEnM8VoEPMOWDEO682W+i//ROc42JuMtaqbNptvIalPIURrW61Hhf7L+xVAuVH69ovO40YQtsEHI2ibEN3AlBrdPZUCEf6s1SJRBVrvVccyIvLhw6AQJD66zJv/Kr4pK4P1tVBb6byyATXx0/gOpNMZdsbouVxzmChzGE4NLtNNnB0VhkXrxnitUssEWmUPJPG3gc2CQtB9c5CyCPpF1STOM50QrLDP6pc1jRvdqx0JMoPR9yePFiV+H9INQGwhxM23SVltBWN5ZT3ccFelFmTia0ianIBKjI3oYoGGYZ5qN9CDuOuiB0tj6ceMtDC+uW7W0IseXeIJLKsNBmEHLf1xadabezmBV4NZV4sgmD69Oelooj2pArOwOa+CCJA6aZhLtG32zrB47eUbcJG4yXnG2qp0jOwhzgHySqcHQAH2ReOd4RYGadujQAs4FCdJyF8IkwLONdPUCr3tCWXcG1ZtHx0aSEO8k+6JzUJiOC34iv9l/dqlFsQMyQh5vVbvO+PkkdLCkOxuhCabcHFsQqNDGicZMEVnqJrnv9Yw6Jeld6pvba8tUy8X/7F2Hkwq2iUMRlKSTppbEyFA/3MOxzk1k4dktAfa1JosT2uMT6ThTubzC/if/WBdPtUH1N9mcKUhlrqG/Zn5SsYTHVd+7K2Qwr2oh4+GDgJNOplgOKgT7CKvJ/4odiJfxjAXQtDd3yitZQMxYpfAwx3A92W50dpk31wnbP69L+9D/JWQaymvvUcVTUT/gsoLhweRDj1LkmOwo2b866/mJQwDFAPSq5mcVJiCD7h3hNWGeoKJqAnp0207o1WnVC/0ZT5yLBosuEQd+8a8WO2CeLxFETBRfuAElog2I+qeIS11f6+wRCXMPS55piPhY1EVupTW9PxmJ1L1iwc9N6NtsBKMsd3ogBsxId5O4DQX+Ul2wRslpil7y6UJYkIWdBtI7dNoC2TkiQ95G687K4kdDNEB9pKWSQeQLRZpSMv7fYGnmU/GnT9vD49oCwMMDc8VffLJsSjqKx93T316/Wgnr8IQMBlCGI8fQ6i/VdyzHWbxLnilTDqUIM/GSHkFtBjeJoWZp4Fpv+H7YPd8dsJ8LOgHIDLl/BoTIYqZdhVDk03NlqySNbTT3tNKMDF3JvXKgND8yEgIk+UWn2PVAIq8Ds3GOjWnV/NSpAlTa9fdPpj3k5IZ9BDvenPtShhTmC+UQFT+YACdGYjcti+kPJ5DZ+SNyRBgRrkW6VQ0GgT1FvbH60Enn5XZa0Zf4R2wIc3KL6tbWOc7iDHAR1IGAoAxGCkfIjdCEJtd+yaCItI5xtxuSgCIdHfgcCiSVfNGXZpNhaxZXSNLkiKrS40mB0LzD5PFdKqEHStga0oe0jmiWCLAKMW6oMnNxZ/vPndUay0n/Frule/d+Rlqh+I204bAkfNcPhrFBWMC1P1vg/JiJ7H6m6/ONZsEEX0olPlhfki1fNoEmscaH83NwfTMyigI++AjO4XGSHtdMwXN6LyLRpkQM2e9vwrGSayreaIlKEPrQpa1qF0EF/9HDQkT3AvYXU8LwztFapXEMU8Y19YvyYYO7Oi6Dkye8tbUCdMVyFfrijQY9lHGrzKJCC05DxODpjD1o4Uis5WPSzBQJ003/GsMaHoESfmefIoffPpRWaOirHoZz9eKd0DWo2HuPaPh4K73r5TNtnMs0gBhqKF/DcJ/rh1QFl4cZb92dMvNFrSQ+tuiBvrJCJ6uYZuh+u23j3PCXccoGtEFIiVifoGRei7YGJ3GjGrbnK0HNHse2tXtJ2Rr6g8DTsBpGLE+RbzuzURzL+YBCCIEnl75tg+Kgqe/SffTnmrZYLiwoBDo5xP606YB+IxVk5C0tx1hWczRs963rXiXiQMeSxmrlroJdluFLabhKO+Czty4kpmzk9s18lfRgtfH6L7QejF3z+7hqeKJKUKaMm+EeDhp1Me/TUWpcFhX/GevCY6eFLSO7M5jYo0vZ7+ON18LPDKqgDapNf3G5EjGe/xzXGR6B81CxIqg+5Z7XUnQEGgEsZJSBDDA0IACSP1pUoyAqOX/kOXpSYIGrZyj54rYktxazfW4fSgqBi1TDw/bduRwyfhridC5R/cBp9XudqK45NaVSoq1R8PjryEuzPtaN3kmKgCeS/UMFD7ZqG3jgWQCAVb8vuoolv6da/Neou0gCjFVijyK9lomq22SdgsA7mmv05Ov1tRwHfYm+vQpZIDfFPnu6PpmW1v+rieui4xwgGmgtzelbXeqiswkpEFT1b2vq2eiOwQLppKaY+vUfRZsjSSiDz6MJba6f3+gpRrtmfdpjOEm42ypQFJ/zkkw4ynGLjMStDiUx5FpbUG8I+sOKPg8Ah8XXXvF4IvwXDNf5r64qbPkKnnz9keG2jFg1RNAG0Ky4MCoifzsszc6Yk+jrD1j/ENHMTJVnvY560uMMKWsMfJTJTI1dETc8NgPizRM5GAHIK/Wcaw6NvU7lTdq15XiZ0RlIPAvYrTZXKdADtZ3Um04Bv0nwM9KBqIXzgX0PQI6t6YScMYPg+F0xOManws7/aQU7Y0dRGqOaGlLuXr+ZBdHRunaIOmy8b9LopSUrjGXri3a/rkSRuVYiNsJnuuRT0irLhLuJJPuOl8wr4peWWGXBK+aRVACgKWne1ZALkXwTY5gZ7jqku/5JxVn6YzSE5SQA2pYGy8IA5xmQo3lf6thOoQBniU4QhlvOl6mppSeHWKvU+yabj5JV3foru0B3Om7fgwwUoGAJMckUuxR6EzKico8184qc25p2VNopK+Yh5Bh9JXm05RqsKYgL6FM+IoFJQGmOf8AnnNwO44OAByLRoVTYdXwmfhL1wQt/gsxxYCDVqQShd7UaZ0pzsq+X/SUHagjzTQ8rHfkD3lwXlslWkn0/Sfo7rqhQib7tpBqWV7A1GFJKxrCYxZtDD2uITKc4prG3L52PwNCwZ4ZQpM6jAG+VL6B76oCpq8D+uf/72ivX9Qj+xuNV5RJ+9zAC21z34X9EXKkuydj8lDAX5UYAo8VYRpREAImpBN5JWv5z7sL39wbdNchCXCdzezU9H3Jk2pPLcigH5l0HcOBCzyNIt8oUmPKAS7ELxOSpTRrB/2c6fNfXoP53kPcW8us5PXZXCV0FLAMeR9Z4KZTQ/AHsfYUL9+Ih0HtDoJpxdUof9fCm4spUlauuxl5nnF1bisr0VBD3A6aakDvUCx5DnLxwRPZ8iCblJAcJRN7DbFnoblBXd6zHvMyZlfKbv//1o+Y05RMapkorHttDRV75kUxgxIteYwmI4D7deR61mPKrznRsm7PKsoPlEbC9PlEoUIAsAqvqEv2yCNpITtmQNBKC61MfDdxAvns4J+1rrsfCqFSBVzoAUPqAbM2IvoEtvfQll6hhzi4K7XeIqz7Z7P7Qh7BaJ1GrF5ACCsolCJT18UZSTWpVj1QVoNp7EXaTmnpccqMAb1/pzbJ6lEz7vnV+5JRS7TVFz6k326U9QJvtMbQSb4urrtHsLOiWf4PpZcd9GpMOMjuYyyUV3T8WJWNffVNJGDlH5FNYwTNknLjeQPYF+y1k7TXgyI3g4FiymTuezZF1dtPRbrD17fLbKqQDBM8Wg0rAHZcc1ZSWDkkNEBADntdhsRXVcjXYv/KhgPFNCNge3wwNnQRaui9xTImsdOCf0b+7aIAYokzJ9nbfsyepaWbGWcvr7KrPVPPZ6bPjkqziO8zkxRbfhEPBf8eyY0TLpxtZmwm2BKUk+4j6N56VIWtv/c1Tl3i8QBjn8f8Uq5QykpL372I3+bj/jZq8J6CjbzdA1/Jstv586WHxU/EiX4RuIPmj5saSstUDV+LmIydpxBmPw2pRXnpDuJZO6+Mt+eOiCsp/48a8H7DQWENhNRIRn9alQ/nckbPdLTY86l2ESHCvF9X6kWNRz6Cs2YkG2UxUs9LCOdtF6eWtReulH7KdCsC/rtwE7NPxAfkKkH1ORpVuqtUtFKvBhHiJBh+UAgq1m+xUdGJ8eqmz0XHrlRwlZmRNLmF9J13cjCaDj30GYsMZ7Y9t7S5YTFRb3FA0vEBUsVyb9FQEl4o+2TLIr6gu5XRmRuhVQEQSGZ2kvgAAAA==" alt="Foto de Cirene" id="fotoCirene">
       <span>Cirene</span>
     </div>
     <span style="font-size:.75rem;opacity:.7;margin-left:auto;">Sessão conjunta</span>
@@ -871,51 +868,32 @@
     <span class="pulso" aria-hidden="true"></span>
   </div>
 
-  <!-- Bloco único com os dois pacientes -->
-  <section class="bloco-unico">
-    <div class="lista-dias" id="listaDiasUnica"></div>
+  <!-- Lista de dias (terças e quintas) -->
+  <div class="lista-dias" id="listaDiasUnica"></div>
 
-    <div class="resumo-duplo">
-      <div class="resumo-individual" id="resumoJose">
-        <p class="titulo-resumo">🧑 José</p>
-        <div class="item">
-          <span class="valor" id="totalDias-jose">0</span>
-          <span class="rotulo">Sessões</span>
-        </div>
-        <div class="item">
-          <span class="valor" id="totalFaltas-jose">0</span>
-          <span class="rotulo">Faltas</span>
-        </div>
-        <div class="item">
-          <span class="valor" id="totalHoras-jose">0h</span>
-          <span class="rotulo">Horas</span>
-        </div>
-      </div>
-      <div class="resumo-individual" id="resumoCirene">
-        <p class="titulo-resumo">👩 Cirene</p>
-        <div class="item">
-          <span class="valor" id="totalDias-cirene">0</span>
-          <span class="rotulo">Sessões</span>
-        </div>
-        <div class="item">
-          <span class="valor" id="totalFaltas-cirene">0</span>
-          <span class="rotulo">Faltas</span>
-        </div>
-        <div class="item">
-          <span class="valor" id="totalHoras-cirene">0h</span>
-          <span class="rotulo">Horas</span>
-        </div>
-      </div>
+  <!-- Resumos individuais -->
+  <div class="resumo-duplo">
+    <div class="resumo-individual" id="resumoJose">
+      <p class="titulo-resumo">🧑 José</p>
+      <div class="item"><span class="valor" id="totalDias-jose">0</span><span class="rotulo">Sessões</span></div>
+      <div class="item"><span class="valor" id="totalFaltas-jose">0</span><span class="rotulo">Faltas</span></div>
+      <div class="item"><span class="valor" id="totalHoras-jose">0h</span><span class="rotulo">Horas</span></div>
     </div>
-
-    <div class="acoes">
-      <button class="btn-limpar" id="btnLimparMes">🗑️ Limpar mês inteiro (ambos)</button>
+    <div class="resumo-individual" id="resumoCirene">
+      <p class="titulo-resumo">👩 Cirene</p>
+      <div class="item"><span class="valor" id="totalDias-cirene">0</span><span class="rotulo">Sessões</span></div>
+      <div class="item"><span class="valor" id="totalFaltas-cirene">0</span><span class="rotulo">Faltas</span></div>
+      <div class="item"><span class="valor" id="totalHoras-cirene">0h</span><span class="rotulo">Horas</span></div>
     </div>
-  </section>
+  </div>
 
+  <div class="acoes">
+    <button class="btn-limpar" id="btnLimparMes">🗑️ Limpar mês inteiro (ambos)</button>
+  </div>
+
+  <!-- Painel financeiro -->
   <div class="painel-financeiro">
     <h2>💰 Financeiro</h2>
-
     <div class="financeiro-grade">
       <div class="financeiro-item">
         <span class="valor" id="finSessoesMes">0</span>
@@ -926,15 +904,12 @@
         <span class="rotulo">Valor do mês</span>
       </div>
     </div>
-
     <p class="financeiro-legenda" id="finLegendaGeral">Calculando total acumulado desde janeiro de 2026…</p>
     <div class="financeiro-progresso">
       <div class="financeiro-progresso-barra" id="finBarraProgresso" style="width:0%"></div>
     </div>
     <p class="financeiro-legenda" id="finProximoPacote"></p>
-
     <button type="button" class="btn-atualizar-financeiro" id="btnAtualizarFinanceiro">Atualizar total geral</button>
-
     <div class="lista-pacotes" id="listaPacotes"></div>
   </div>
 </main>
@@ -943,9 +918,10 @@
   Copyright MD2026
 </footer>
 
-</div><!-- fim de #appConteudo -->
+</div><!-- #appConteudo -->
 
 <script type="module">
+  // ---------- CONFIGURAÇÃO DO FIREBASE ----------
   const firebaseConfig = {
     apiKey: "AIzaSyCTz0F4JdjBVzefsfFkx6oH4wGUPhYKDqM",
     authDomain: "ponto-andressa-22julho.firebaseapp.com",
@@ -955,6 +931,7 @@
     appId: "1:583781251325:web:b2d722c0ea4a1936fca694"
   };
 
+  // ---------- CONSTANTES ----------
   const HORARIO_PADRAO_ENTRADA = "14:00";
   const HORARIO_PADRAO_SAIDA = "15:30";
   const CODIGO_PARA_LIMPAR = "1234";
@@ -962,32 +939,33 @@
   const TAMANHO_PACOTE = 10;
   const VALOR_PACOTE = VALOR_SESSAO * TAMANHO_PACOTE;
 
-  function formatarMoeda(valor){
-    return valor.toLocaleString('pt-BR', {style:'currency', currency:'BRL'});
-  }
-
   const DIAS_SEMANA = ['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado'];
   const MESES = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
 
+  // ---------- DATA ATUAL ----------
   const hoje = new Date();
   const anoAtual = hoje.getFullYear();
   const mesAtual = hoje.getMonth();
   const hojeISO = formatarISO(hoje);
 
-  function formatarISO(d){
+  function formatarISO(d) {
     return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
   }
 
-  // Controle de tamanho de texto
+  function formatarMoeda(valor) {
+    return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  }
+
+  // ---------- CONTROLE DE TAMANHO DE TEXTO ----------
   const NIVEIS_TEXTO = [100, 112.5, 125, 137.5, 150];
   let indiceTexto = 1;
-  try{
+  try {
     const salvo = localStorage.getItem('ponto-tamanho-texto');
-    if(salvo !== null) indiceTexto = Math.min(Math.max(parseInt(salvo,10) || 1, 0), NIVEIS_TEXTO.length-1);
-  }catch(e){}
-  function aplicarTamanhoTexto(){
+    if (salvo !== null) indiceTexto = Math.min(Math.max(parseInt(salvo,10) || 1, 0), NIVEIS_TEXTO.length-1);
+  } catch(e) {}
+  function aplicarTamanhoTexto() {
     document.documentElement.style.fontSize = NIVEIS_TEXTO[indiceTexto] + '%';
-    try{ localStorage.setItem('ponto-tamanho-texto', String(indiceTexto)); }catch(e){}
+    try { localStorage.setItem('ponto-tamanho-texto', String(indiceTexto)); } catch(e) {}
   }
   aplicarTamanhoTexto();
   document.getElementById('btnAumentarTexto').addEventListener('click', () => {
@@ -999,14 +977,14 @@
     aplicarTamanhoTexto();
   });
 
-  // Lista de meses: janeiro 2026 até atual
+  // ---------- LISTA DE MESES (janeiro 2026 até atual) ----------
   const listaMeses = [];
   {
     let a = 2026, m = 0;
-    while(a < anoAtual || (a === anoAtual && m <= mesAtual)){
-      listaMeses.push({ano:a, mes:m});
+    while (a < anoAtual || (a === anoAtual && m <= mesAtual)) {
+      listaMeses.push({ ano: a, mes: m });
       m++;
-      if(m > 11){ m = 0; a++; }
+      if (m > 11) { m = 0; a++; }
     }
   }
   let indiceMesSelecionado = listaMeses.length - 1;
@@ -1022,21 +1000,21 @@
 
   const btnMesAnterior = document.getElementById('btnMesAnterior');
   const btnMesSeguinte = document.getElementById('btnMesSeguinte');
-  function atualizarBotoesMes(){
+  function atualizarBotoesMes() {
     btnMesAnterior.disabled = indiceMesSelecionado <= 0;
     btnMesSeguinte.disabled = indiceMesSelecionado >= listaMeses.length - 1;
   }
   atualizarBotoesMes();
 
   btnMesAnterior.addEventListener('click', () => {
-    if(indiceMesSelecionado > 0){
+    if (indiceMesSelecionado > 0) {
       indiceMesSelecionado--;
       seletorMes.value = indiceMesSelecionado;
       trocarMes();
     }
   });
   btnMesSeguinte.addEventListener('click', () => {
-    if(indiceMesSelecionado < listaMeses.length - 1){
+    if (indiceMesSelecionado < listaMeses.length - 1) {
       indiceMesSelecionado++;
       seletorMes.value = indiceMesSelecionado;
       trocarMes();
@@ -1047,15 +1025,26 @@
     trocarMes();
   });
 
-  // Firebase
-  const statusEl = document.getElementById('statusSync');
-  const telaLoginEl = document.getElementById('telaLogin');
-  const appConteudoEl = document.getElementById('appConteudo');
-  const erroLoginEl = document.getElementById('erroLogin');
-  const btnEntrarEl = document.getElementById('btnEntrar');
-  let db;
-  let usuarioAutenticado = null;
-  let authFns = null;
+  // ---------- GERAR DIAS ÚTEIS (terças e quintas) ----------
+  function gerarDiasUteis(ano, mes) {
+    const lista = [];
+    const total = new Date(ano, mes+1, 0).getDate();
+    for (let dia = 1; dia <= total; dia++) {
+      const d = new Date(ano, mes, dia);
+      const ds = d.getDay();
+      if (ds === 2 || ds === 4) lista.push(d);
+    }
+    return lista;
+  }
+
+  function idDocumento(ano, mes) {
+    return `andressa-sessao-${ano}-${String(mes+1).padStart(2,'0')}`;
+  }
+
+  let diasUteis = [];
+
+  // ---------- ESTADO DO FIREBASE ----------
+  let db, usuarioAutenticado = null, authFns = null;
   let firestoreOk = false;
   let fnDoc, fnSetDoc, fnOnSnapshot, fnGetDoc;
   let cancelarInscricao = null;
@@ -1063,13 +1052,19 @@
   let docRef = null;
   let statusSync = 'carregando';
 
-  function atualizarStatusGeral(){
-    if(statusSync === 'ok'){
+  const statusEl = document.getElementById('statusSync');
+  const telaLoginEl = document.getElementById('telaLogin');
+  const appConteudoEl = document.getElementById('appConteudo');
+  const erroLoginEl = document.getElementById('erroLogin');
+  const btnEntrarEl = document.getElementById('btnEntrar');
+
+  function atualizarStatusGeral() {
+    if (statusSync === 'ok') {
       statusEl.textContent = 'Sincronizado';
       statusEl.classList.remove('erro');
       statusEl.classList.add('ok');
-    } else if(statusSync === 'erro'){
-      statusEl.textContent = 'Sem conexão com o banco';
+    } else if (statusSync === 'erro') {
+      statusEl.textContent = 'Sem conexão';
       statusEl.classList.remove('ok');
       statusEl.classList.add('erro');
     } else {
@@ -1078,26 +1073,11 @@
     }
   }
 
-  function gerarDiasUteis(ano, mes){
-    const lista = [];
-    const totalDiasNoMes = new Date(ano, mes+1, 0).getDate();
-    for(let dia=1; dia<=totalDiasNoMes; dia++){
-      const d = new Date(ano, mes, dia);
-      const diaSemana = d.getDay();
-      if(diaSemana === 2 || diaSemana === 4) lista.push(d);
-    }
-    return lista;
-  }
-
-  let diasUteis = [];
-  function idDocumento(ano, mes){
-    return `andressa-sessao-${ano}-${String(mes+1).padStart(2,'0')}`;
-  }
-
-  function conectarFirestore(){
-    if(!firestoreOk || !usuarioAutenticado) return;
-    const {ano, mes} = listaMeses[indiceMesSelecionado];
-    if(cancelarInscricao){ cancelarInscricao(); cancelarInscricao = null; }
+  // ---------- CONECTAR AO FIRESTORE ----------
+  function conectarFirestore() {
+    if (!firestoreOk || !usuarioAutenticado) return;
+    const { ano, mes } = listaMeses[indiceMesSelecionado];
+    if (cancelarInscricao) { cancelarInscricao(); cancelarInscricao = null; }
     docRef = fnDoc(db, 'pontos', idDocumento(ano, mes));
     cancelarInscricao = fnOnSnapshot(docRef, (snap) => {
       dadosSessao = (snap.exists() && snap.data().dias) ? snap.data().dias : {};
@@ -1112,16 +1092,16 @@
     });
   }
 
-  function trocarMes(){
-    const {ano, mes} = listaMeses[indiceMesSelecionado];
+  function trocarMes() {
+    const { ano, mes } = listaMeses[indiceMesSelecionado];
     diasUteis = gerarDiasUteis(ano, mes);
     atualizarBotoesMes();
 
     const ehMesAtual = (ano === anoAtual && mes === mesAtual);
-    const hojeEhDiaDeAtendimento = (hoje.getDay() === 2 || hoje.getDay() === 4);
-    document.getElementById('cartaoHoje').hidden = !(ehMesAtual && hojeEhDiaDeAtendimento);
+    const hojeEhDiaAtendimento = (hoje.getDay() === 2 || hoje.getDay() === 4);
+    document.getElementById('cartaoHoje').hidden = !(ehMesAtual && hojeEhDiaAtendimento);
     const avisoEl = document.getElementById('avisoMesPassado');
-    if(ehMesAtual){
+    if (ehMesAtual) {
       avisoEl.hidden = true;
     } else {
       avisoEl.hidden = false;
@@ -1129,45 +1109,45 @@
     }
 
     dadosSessao = {};
-    if(cancelarInscricao){ cancelarInscricao(); cancelarInscricao = null; }
+    if (cancelarInscricao) { cancelarInscricao(); cancelarInscricao = null; }
     renderizarDias();
     statusSync = 'carregando';
     atualizarStatusGeral();
     conectarFirestore();
   }
 
-  // Financeiro
+  // ---------- FINANCEIRO ----------
   let cancelarInscricaoPagamentos = null;
   let pagamentosDocRef = null;
   let pagamentos = {};
   let totalSessoesAcumuladas = 0;
 
-  function contarSessoesCobraveis(diasDoMes, dados){
+  function contarSessoesCobraveis(diasDoMes, dados) {
     let total = 0;
     diasDoMes.forEach(d => {
       const iso = formatarISO(d);
       const reg = dados[iso];
-      if(!reg) return;
+      if (!reg) return;
       const faltouJose = !!reg.faltaJose;
       const faltouCirene = !!reg.faltaCirene;
-      if(!(faltouJose && faltouCirene)) total++;
+      if (!(faltouJose && faltouCirene)) total++;
     });
     return total;
   }
 
-  function atualizarFinanceiroMes(){
+  function atualizarFinanceiroMes() {
     const total = contarSessoesCobraveis(diasUteis, dadosSessao);
     document.getElementById('finSessoesMes').textContent = total;
     document.getElementById('finValorMes').textContent = formatarMoeda(total * VALOR_SESSAO);
   }
 
-  async function recalcularFinanceiro(){
-    if(!firestoreOk || !usuarioAutenticado) return;
+  async function recalcularFinanceiro() {
+    if (!firestoreOk || !usuarioAutenticado) return;
     const legendaEl = document.getElementById('finLegendaGeral');
     legendaEl.textContent = 'Calculando total acumulado desde janeiro de 2026…';
-    try{
+    try {
       let totalGeral = 0;
-      for(const {ano, mes} of listaMeses){
+      for (const { ano, mes } of listaMeses) {
         const diasDoMes = gerarDiasUteis(ano, mes);
         const ref = fnDoc(db, 'pontos', idDocumento(ano, mes));
         const snap = await fnGetDoc(ref);
@@ -1176,19 +1156,19 @@
       }
       totalSessoesAcumuladas = totalGeral;
       renderizarFinanceiroGeral();
-    }catch(e){
+    } catch (e) {
       console.error('Erro ao calcular financeiro geral:', e);
       legendaEl.textContent = 'Não foi possível calcular o total agora — tente de novo.';
     }
   }
 
-  function renderizarFinanceiroGeral(){
+  function renderizarFinanceiroGeral() {
     const pacotesCompletos = Math.floor(totalSessoesAcumuladas / TAMANHO_PACOTE);
     const sessoesNoPacoteAtual = totalSessoesAcumuladas % TAMANHO_PACOTE;
     const percentual = (sessoesNoPacoteAtual / TAMANHO_PACOTE) * 100;
 
     document.getElementById('finLegendaGeral').textContent =
-      `${totalSessoesAcumuladas} sessões realizadas desde janeiro de 2026 — total gerado: ${formatarMoeda(totalSessoesAcumuladas * VALOR_SESSAO)}`;
+      `${totalSessoesAcumuladas} sessões realizadas desde jan/2026 — total gerado: ${formatarMoeda(totalSessoesAcumuladas * VALOR_SESSAO)}`;
     document.getElementById('finBarraProgresso').style.width = percentual + '%';
 
     const faltam = TAMANHO_PACOTE - sessoesNoPacoteAtual;
@@ -1199,10 +1179,10 @@
     renderizarListaPacotes(pacotesCompletos);
   }
 
-  function renderizarListaPacotes(pacotesCompletos){
+  function renderizarListaPacotes(pacotesCompletos) {
     const listaEl = document.getElementById('listaPacotes');
     listaEl.innerHTML = '';
-    for(let i = 1; i <= pacotesCompletos; i++){
+    for (let i = 1; i <= pacotesCompletos; i++) {
       const inicio = (i-1)*TAMANHO_PACOTE + 1;
       const fim = i*TAMANHO_PACOTE;
       const pago = !!pagamentos[String(i)];
@@ -1214,29 +1194,28 @@
       nome.className = 'pacote-nome';
       nome.textContent = `Pacote ${i} (sessões ${inicio}–${fim}) — ${formatarMoeda(VALOR_PACOTE)}`;
 
-      const rotuloCheckbox = document.createElement('label');
+      const label = document.createElement('label');
       const checkbox = document.createElement('input');
       checkbox.type = 'checkbox';
       checkbox.checked = pago;
-      checkbox.setAttribute('aria-label', `Marcar pacote ${i} como cobrado`);
       checkbox.addEventListener('change', () => {
         marcarPacotePago(i, checkbox.checked);
       });
-      rotuloCheckbox.appendChild(checkbox);
-      rotuloCheckbox.appendChild(document.createTextNode('Cobrado'));
+      label.appendChild(checkbox);
+      label.appendChild(document.createTextNode('Cobrado'));
 
       item.appendChild(nome);
-      item.appendChild(rotuloCheckbox);
+      item.appendChild(label);
       listaEl.appendChild(item);
     }
-    if(pacotesCompletos === 0){
+    if (pacotesCompletos === 0) {
       listaEl.innerHTML = '<p class="financeiro-legenda">Ainda não há pacotes de 10 sessões completos.</p>';
     }
   }
 
-  function conectarPagamentos(){
-    if(!firestoreOk || !usuarioAutenticado) return;
-    if(cancelarInscricaoPagamentos){ cancelarInscricaoPagamentos(); cancelarInscricaoPagamentos = null; }
+  function conectarPagamentos() {
+    if (!firestoreOk || !usuarioAutenticado) return;
+    if (cancelarInscricaoPagamentos) { cancelarInscricaoPagamentos(); cancelarInscricaoPagamentos = null; }
     pagamentosDocRef = fnDoc(db, 'financeiro', 'pagamentos');
     cancelarInscricaoPagamentos = fnOnSnapshot(pagamentosDocRef, (snap) => {
       pagamentos = (snap.exists() && snap.data().pago) ? snap.data().pago : {};
@@ -1246,40 +1225,43 @@
     });
   }
 
-  async function marcarPacotePago(numeroPacote, pago){
-    if(!firestoreOk || !pagamentosDocRef) return;
-    try{
-      await fnSetDoc(pagamentosDocRef, { pago: { [String(numeroPacote)]: pago } }, { merge: true });
-    }catch(e){
+  async function marcarPacotePago(numero, pago) {
+    if (!firestoreOk || !pagamentosDocRef) return;
+    try {
+      await fnSetDoc(pagamentosDocRef, { pago: { [String(numero)]: pago } }, { merge: true });
+    } catch (e) {
       console.error('Erro ao salvar pagamento:', e);
     }
   }
 
   document.getElementById('btnAtualizarFinanceiro').addEventListener('click', recalcularFinanceiro);
 
-  async function salvarDia(iso, registro){
-    if(!firestoreOk || !docRef) return;
-    try{
+  // ---------- SALVAR DIA ----------
+  async function salvarDia(iso, registro) {
+    if (!firestoreOk || !docRef) return;
+    try {
       await fnSetDoc(docRef, { dias: { [iso]: registro } }, { merge: true });
-    }catch(e){
+    } catch (e) {
       console.error('Erro ao salvar:', e);
       statusSync = 'erro';
       atualizarStatusGeral();
     }
   }
 
-  function calcularHoras(entrada, saida){
-    if(!entrada || !saida) return null;
+  // ---------- CALCULAR HORAS ----------
+  function calcularHoras(entrada, saida) {
+    if (!entrada || !saida) return null;
     const [he, me] = entrada.split(':').map(Number);
     const [hs, ms] = saida.split(':').map(Number);
     let minutos = (hs*60+ms) - (he*60+me);
-    if(minutos <= 0) return null;
+    if (minutos <= 0) return null;
     const horas = Math.floor(minutos/60);
-    const restoMin = minutos % 60;
-    return {texto: `${horas}h${restoMin ? String(restoMin).padStart(2,'0') : ''}`, minutos};
+    const resto = minutos % 60;
+    return { texto: `${horas}h${resto ? String(resto).padStart(2,'0') : ''}`, minutos };
   }
 
-  function renderizarDias(){
+  // ---------- RENDERIZAR DIAS ----------
+  function renderizarDias() {
     const listaEl = document.getElementById('listaDiasUnica');
     listaEl.innerHTML = '';
     let minutosJose = 0, minutosCirene = 0;
@@ -1301,10 +1283,11 @@
 
       const linha = document.createElement('div');
       linha.className = 'linha-dia' + (ehHoje ? ' hoje' : '');
-      if(reg.faltaJose) linha.classList.add('falta-jose');
-      if(reg.faltaCirene) linha.classList.add('falta-cirene');
+      if (reg.faltaJose) linha.classList.add('falta-jose');
+      if (reg.faltaCirene) linha.classList.add('falta-cirene');
       linha.id = ehHoje ? 'linhaHoje' : '';
 
+      // Cabeçalho com data em destaque
       const cabeca = document.createElement('div');
       cabeca.className = 'linha-cabeca';
       cabeca.innerHTML = `
@@ -1313,51 +1296,46 @@
         ${ehHoje ? '<span class="tag-hoje">Hoje</span>' : ''}
       `;
 
-      // Horários (compartilhados)
-      const camposHorarios = document.createElement('div');
-      camposHorarios.className = 'campos';
-      camposHorarios.style.marginBottom = '.5rem';
+      // Horários compartilhados
+      const horarios = document.createElement('div');
+      horarios.className = 'campos-horarios';
 
       const cEntrada = document.createElement('div');
       cEntrada.className = 'campo';
-      const lEntrada = document.createElement('label');
-      lEntrada.textContent = 'Entrada';
+      cEntrada.innerHTML = `<label>Entrada</label>`;
       const iEntrada = document.createElement('input');
       iEntrada.type = 'time';
       iEntrada.value = reg.entrada || HORARIO_PADRAO_ENTRADA;
       iEntrada.disabled = (reg.faltaJose && reg.faltaCirene);
       iEntrada.addEventListener('change', () => {
-        atualizarRegistro(iso, {entrada: iEntrada.value});
+        atualizarRegistro(iso, { entrada: iEntrada.value });
       });
-      cEntrada.appendChild(lEntrada);
       cEntrada.appendChild(iEntrada);
 
       const cSaida = document.createElement('div');
       cSaida.className = 'campo';
-      const lSaida = document.createElement('label');
-      lSaida.textContent = 'Saída';
+      cSaida.innerHTML = `<label>Saída</label>`;
       const iSaida = document.createElement('input');
       iSaida.type = 'time';
       iSaida.value = reg.saida || HORARIO_PADRAO_SAIDA;
       iSaida.disabled = (reg.faltaJose && reg.faltaCirene);
       iSaida.addEventListener('change', () => {
-        atualizarRegistro(iso, {saida: iSaida.value});
+        atualizarRegistro(iso, { saida: iSaida.value });
       });
-      cSaida.appendChild(lSaida);
       cSaida.appendChild(iSaida);
 
-      camposHorarios.appendChild(cEntrada);
-      camposHorarios.appendChild(cSaida);
+      horarios.appendChild(cEntrada);
+      horarios.appendChild(cSaida);
 
-      // Colunas José e Cirene
-      const gridPacientes = document.createElement('div');
-      gridPacientes.className = 'grid-pacientes';
+      // Grid pacientes
+      const grid = document.createElement('div');
+      grid.className = 'grid-pacientes';
 
       // Coluna José
       const colJose = document.createElement('div');
       colJose.className = 'paciente-coluna';
       colJose.innerHTML = `
-        <p class="nome-coluna"><img class="mini-foto" src="https://via.placeholder.com/100/9D174D/FFFFFF?text=José" alt=""> José</p>
+        <p class="nome-coluna">🧑 José</p>
         <div class="campo-observacao">
           <label>Observações</label>
           <textarea rows="2" placeholder="Intercorrências, dor, etc.">${reg.obsJose || ''}</textarea>
@@ -1371,19 +1349,19 @@
       obsJose.addEventListener('input', () => {
         clearTimeout(timerJose);
         timerJose = setTimeout(() => {
-          atualizarRegistro(iso, {obsJose: obsJose.value}, {semRenderizar: true});
+          atualizarRegistro(iso, { obsJose: obsJose.value }, { semRenderizar: true });
         }, 500);
       });
       const chkFaltaJose = colJose.querySelector('input[type="checkbox"]');
       chkFaltaJose.addEventListener('change', () => {
-        atualizarRegistro(iso, {faltaJose: chkFaltaJose.checked});
+        atualizarRegistro(iso, { faltaJose: chkFaltaJose.checked });
       });
 
       // Coluna Cirene
       const colCirene = document.createElement('div');
       colCirene.className = 'paciente-coluna';
       colCirene.innerHTML = `
-        <p class="nome-coluna"><img class="mini-foto" src="https://via.placeholder.com/100/DB2777/FFFFFF?text=Cirene" alt=""> Cirene</p>
+        <p class="nome-coluna">👩 Cirene</p>
         <div class="campo-observacao">
           <label>Observações</label>
           <textarea rows="2" placeholder="Intercorrências, dor, etc.">${reg.obsCirene || ''}</textarea>
@@ -1397,50 +1375,48 @@
       obsCirene.addEventListener('input', () => {
         clearTimeout(timerCirene);
         timerCirene = setTimeout(() => {
-          atualizarRegistro(iso, {obsCirene: obsCirene.value}, {semRenderizar: true});
+          atualizarRegistro(iso, { obsCirene: obsCirene.value }, { semRenderizar: true });
         }, 500);
       });
       const chkFaltaCirene = colCirene.querySelector('input[type="checkbox"]');
       chkFaltaCirene.addEventListener('change', () => {
-        atualizarRegistro(iso, {faltaCirene: chkFaltaCirene.checked});
+        atualizarRegistro(iso, { faltaCirene: chkFaltaCirene.checked });
       });
 
-      gridPacientes.appendChild(colJose);
-      gridPacientes.appendChild(colCirene);
+      grid.appendChild(colJose);
+      grid.appendChild(colCirene);
 
-      // Horas totais do dia (compartilhado, só aparece se ambos não faltarem)
-      const horasCalculadas = (reg.faltaJose && reg.faltaCirene) ? null : calcularHoras(reg.entrada, reg.saida);
+      // Rodapé com horas
       const rodape = document.createElement('div');
-      rodape.style.display = 'flex';
-      rodape.style.justifyContent = 'flex-end';
-      rodape.style.marginTop = '.3rem';
+      rodape.className = 'rodape-linha';
+      const horasCalculadas = (reg.faltaJose && reg.faltaCirene) ? null : calcularHoras(reg.entrada, reg.saida);
       const horasSpan = document.createElement('span');
       horasSpan.className = 'horas-dia' + (horasCalculadas ? '' : ' vazio');
       horasSpan.textContent = (reg.faltaJose && reg.faltaCirene) ? 'Ambos faltaram' : (horasCalculadas ? horasCalculadas.texto : '—');
       rodape.appendChild(horasSpan);
 
       linha.appendChild(cabeca);
-      linha.appendChild(camposHorarios);
-      linha.appendChild(gridPacientes);
+      linha.appendChild(horarios);
+      linha.appendChild(grid);
       linha.appendChild(rodape);
       listaEl.appendChild(linha);
 
       // Estatísticas
-      if(!reg.faltaJose && horasCalculadas){
+      if (!reg.faltaJose && horasCalculadas) {
         diasJose++;
         minutosJose += horasCalculadas.minutos;
       }
-      if(reg.faltaJose) faltasJose++;
+      if (reg.faltaJose) faltasJose++;
 
-      if(!reg.faltaCirene && horasCalculadas){
+      if (!reg.faltaCirene && horasCalculadas) {
         diasCirene++;
         minutosCirene += horasCalculadas.minutos;
       }
-      if(reg.faltaCirene) faltasCirene++;
+      if (reg.faltaCirene) faltasCirene++;
     });
 
     // Atualizar resumos
-    function atualizaResumo(id, dias, faltas, minutos){
+    function atualizaResumo(id, dias, faltas, minutos) {
       document.getElementById(`totalDias-${id}`).textContent = dias;
       document.getElementById(`totalFaltas-${id}`).textContent = faltas;
       const h = Math.floor(minutos/60);
@@ -1453,7 +1429,7 @@
     atualizarFinanceiroMes();
   }
 
-  function atualizarRegistro(iso, mudanca, opcoes = {}){
+  function atualizarRegistro(iso, mudanca, opcoes = {}) {
     const atual = dadosSessao[iso] || {
       entrada: HORARIO_PADRAO_ENTRADA,
       saida: HORARIO_PADRAO_SAIDA,
@@ -1462,33 +1438,35 @@
       obsJose: '',
       obsCirene: ''
     };
-    const novo = {...atual, ...mudanca};
+    const novo = { ...atual, ...mudanca };
     dadosSessao[iso] = novo;
-    if(!opcoes.semRenderizar) renderizarDias();
+    if (!opcoes.semRenderizar) renderizarDias();
     salvarDia(iso, novo);
   }
 
+  // ---------- ROLAR PARA HOJE ----------
   let jaRolouNesteMes = false;
-  function rolarParaHojeSeNecessario(){
-    const {ano, mes} = listaMeses[indiceMesSelecionado];
-    if(!(ano === anoAtual && mes === mesAtual)) return;
-    if(jaRolouNesteMes) return;
+  function rolarParaHojeSeNecessario() {
+    const { ano, mes } = listaMeses[indiceMesSelecionado];
+    if (!(ano === anoAtual && mes === mesAtual)) return;
+    if (jaRolouNesteMes) return;
     const alvo = document.getElementById('linhaHoje');
-    if(alvo){
-      setTimeout(() => alvo.scrollIntoView({behavior:'smooth', block:'center'}), 200);
+    if (alvo) {
+      setTimeout(() => alvo.scrollIntoView({ behavior: 'smooth', block: 'center' }), 200);
       jaRolouNesteMes = true;
     }
   }
 
+  // ---------- LIMPAR MÊS ----------
   document.getElementById('btnLimparMes').addEventListener('click', async () => {
-    const {ano, mes} = listaMeses[indiceMesSelecionado];
-    const codigoDigitado = prompt(`Para apagar todos os registros de ${MESES[mes]} de ${ano}, digite o código de confirmação:`);
-    if(codigoDigitado === null) return;
-    if(codigoDigitado !== CODIGO_PARA_LIMPAR){
+    const { ano, mes } = listaMeses[indiceMesSelecionado];
+    const codigo = prompt(`Para apagar todos os registros de ${MESES[mes]} de ${ano}, digite o código:`);
+    if (codigo === null) return;
+    if (codigo !== CODIGO_PARA_LIMPAR) {
       alert('Código incorreto.');
       return;
     }
-    if(!confirm(`Tem certeza que deseja apagar todos os registros de ${MESES[mes]} de ${ano}?`)) return;
+    if (!confirm(`Tem certeza que deseja apagar todos os registros de ${MESES[mes]} de ${ano}?`)) return;
     const vazio = {};
     diasUteis.forEach(d => vazio[formatarISO(d)] = {
       entrada: HORARIO_PADRAO_ENTRADA,
@@ -1500,18 +1478,18 @@
     });
     dadosSessao = vazio;
     renderizarDias();
-    if(firestoreOk && docRef){
-      try{
+    if (firestoreOk && docRef) {
+      try {
         await fnSetDoc(docRef, { dias: vazio }, { merge: false });
-      }catch(e){
+      } catch (e) {
         console.error('Erro ao limpar:', e);
       }
     }
   });
 
-  // Firebase init
-  async function iniciarFirebase(){
-    try{
+  // ---------- INICIAR FIREBASE ----------
+  async function iniciarFirebase() {
+    try {
       const [{ initializeApp }, { getFirestore, doc, setDoc, onSnapshot, getDoc }, authMod] = await Promise.all([
         import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"),
         import("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"),
@@ -1535,7 +1513,7 @@
 
       authMod.onAuthStateChanged(auth, (user) => {
         usuarioAutenticado = user;
-        if(user){
+        if (user) {
           telaLoginEl.style.display = 'none';
           appConteudoEl.classList.remove('escondido');
           document.getElementById('emailLogado').textContent = user.email || '';
@@ -1546,22 +1524,22 @@
         } else {
           telaLoginEl.style.display = 'flex';
           appConteudoEl.classList.add('escondido');
-          if(cancelarInscricao){ cancelarInscricao(); cancelarInscricao = null; }
-          if(cancelarInscricaoPagamentos){ cancelarInscricaoPagamentos(); cancelarInscricaoPagamentos = null; }
+          if (cancelarInscricao) { cancelarInscricao(); cancelarInscricao = null; }
+          if (cancelarInscricaoPagamentos) { cancelarInscricaoPagamentos(); cancelarInscricaoPagamentos = null; }
         }
       });
-    }catch(e){
+    } catch (e) {
       console.error('Erro ao iniciar Firebase:', e);
       statusEl.textContent = 'Erro ao conectar';
       statusEl.classList.add('erro');
     }
   }
 
-  // Login
+  // ---------- EVENTOS DE LOGIN ----------
   document.getElementById('formLogin').addEventListener('submit', async (ev) => {
     ev.preventDefault();
     erroLoginEl.textContent = '';
-    if(!authFns){
+    if (!authFns) {
       erroLoginEl.textContent = 'Aguarde o carregamento.';
       return;
     }
@@ -1569,13 +1547,13 @@
     const senha = document.getElementById('campoSenhaLogin').value;
     btnEntrarEl.disabled = true;
     btnEntrarEl.textContent = 'Entrando…';
-    try{
+    try {
       await authFns.signInWithEmailAndPassword(authFns.auth, email, senha);
-    }catch(e){
+    } catch (e) {
       erroLoginEl.textContent = e.code === 'auth/wrong-password' ? 'Senha incorreta.' :
                                  e.code === 'auth/user-not-found' ? 'E-mail não cadastrado.' :
                                  'Erro ao entrar. Tente novamente.';
-    }finally{
+    } finally {
       btnEntrarEl.disabled = false;
       btnEntrarEl.textContent = 'Entrar';
     }
@@ -1583,18 +1561,18 @@
 
   document.getElementById('btnEsqueciSenha').addEventListener('click', async () => {
     const email = document.getElementById('campoEmailLogin').value.trim();
-    if(!email){ erroLoginEl.textContent = 'Digite seu e-mail.'; return; }
-    if(!authFns) return;
-    try{
+    if (!email) { erroLoginEl.textContent = 'Digite seu e-mail.'; return; }
+    if (!authFns) return;
+    try {
       await authFns.sendPasswordResetEmail(authFns.auth, email);
       erroLoginEl.textContent = 'E-mail de redefinição enviado!';
-    }catch(e){
+    } catch (e) {
       erroLoginEl.textContent = 'Erro ao enviar. Verifique o e-mail.';
     }
   });
 
   document.getElementById('btnSair').addEventListener('click', () => {
-    if(authFns) authFns.signOut(authFns.auth);
+    if (authFns) authFns.signOut(authFns.auth);
   });
 
   document.getElementById('dataHojeTexto').textContent =
