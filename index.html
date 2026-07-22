@@ -31,7 +31,7 @@
   }
 
   html{
-    font-size: 112.5%; /* base ~18px para melhor leitura */
+    font-size: 112.5%;
   }
 
   *{box-sizing:border-box;}
@@ -94,6 +94,12 @@
     margin:0;
     line-height:1.1;
   }
+  .subtitulo-header{
+    font-size:.9rem;
+    font-weight:600;
+    opacity:.85;
+    margin-top:-.2rem;
+  }
 
   .controle-texto{
     display:flex;
@@ -130,6 +136,37 @@
   .status-sync.ok::before{ content:""; width:8px;height:8px;border-radius:50%; background:#8CF0AE; display:inline-block; }
   .status-sync.erro::before{ content:""; width:8px;height:8px;border-radius:50%; background:#FFB081; display:inline-block; }
 
+  /* Fotos dos pacientes */
+  .fotos-pacientes{
+    display:flex;
+    align-items:center;
+    gap:1.2rem;
+    margin: 1.2rem 0 .5rem;
+    flex-wrap:wrap;
+    position:relative; z-index:1;
+  }
+  .foto-paciente{
+    display:flex;
+    align-items:center;
+    gap:.5rem;
+    background: rgba(255,255,255,0.15);
+    padding: .3rem .8rem .3rem .3rem;
+    border-radius:999px;
+    backdrop-filter: blur(2px);
+  }
+  .foto-paciente img{
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius:50%;
+    border: 2px solid #fff;
+    object-fit:cover;
+    background:#fff;
+  }
+  .foto-paciente span{
+    font-weight:700;
+    font-size:.95rem;
+  }
+
   .titulo-paciente{
     display:flex;
     align-items:center;
@@ -139,23 +176,6 @@
     font-size: 1.2rem;
     color: var(--texto-escuro);
     margin: 1.9rem .2rem .9rem;
-  }
-  .titulo-paciente .ponto-cor{
-    width:.95rem; height:.95rem;
-    border-radius:50%;
-    display:inline-block;
-    flex-shrink:0;
-  }
-  .bloco-paciente[data-paciente="jose"] .ponto-cor{ background:#9D174D; }
-  .bloco-paciente[data-paciente="cirene"] .ponto-cor{ background:#DB2777; }
-  .bloco-paciente:first-of-type .titulo-paciente{ margin-top: 1.1rem; }
-
-  .bloco-paciente{
-    padding-bottom: .3rem;
-    border-bottom: 2px dashed var(--azul-claro-2);
-  }
-  .bloco-paciente:last-of-type{
-    border-bottom: none;
   }
 
   .navegador-mes{
@@ -286,7 +306,7 @@
     box-shadow: 0 0 0 4px rgba(21,80,196,0.15);
     background: linear-gradient(180deg,#FFFFFF, #F3F8FF);
   }
-  .linha-dia.falta{
+  .linha-dia.falta-jose, .linha-dia.falta-cirene{
     background: var(--alerta-bg);
     border-color: #E0A868;
   }
@@ -317,6 +337,36 @@
     text-transform:uppercase;
     padding: .25rem .55rem;
     border-radius:999px;
+  }
+
+  .grid-pacientes{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top:.3rem;
+  }
+  .paciente-coluna{
+    background: #FBFDFF;
+    border-radius:12px;
+    padding: .7rem .8rem;
+    border:1px solid var(--azul-claro-2);
+  }
+  .paciente-coluna .nome-coluna{
+    font-weight:800;
+    font-size:.9rem;
+    color: var(--azul-escuro);
+    margin:0 0 .5rem;
+    display:flex;
+    align-items:center;
+    gap:.4rem;
+  }
+  .paciente-coluna .nome-coluna .mini-foto{
+    width:1.6rem;
+    height:1.6rem;
+    border-radius:50%;
+    object-fit:cover;
+    background:#ddd;
+    border:1px solid var(--azul-claro-2);
   }
 
   .campos{
@@ -386,13 +436,6 @@
   }
   .campo-observacao textarea::placeholder{ color:#9AA5BD; }
 
-  .rodape-linha{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:.7rem;
-    flex-wrap:wrap;
-  }
   .falta-toggle{
     display:flex;
     align-items:center;
@@ -410,6 +453,7 @@
     accent-color: var(--alerta);
     cursor:pointer;
   }
+
   .horas-dia{
     font-size: .95rem;
     font-weight:800;
@@ -423,8 +467,13 @@
     background:#EEF2F8;
   }
 
-  .resumo{
+  .resumo-duplo{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
     margin-top: 1.7rem;
+  }
+  .resumo-individual{
     background: linear-gradient(135deg, var(--azul-escuro), var(--azul-medio));
     color: var(--texto-claro);
     border-radius: 18px;
@@ -432,17 +481,26 @@
     box-shadow: var(--sombra);
     display:grid;
     grid-template-columns: repeat(3,1fr);
-    gap: .7rem;
+    gap: .5rem;
     text-align:center;
   }
-  .resumo .item .valor{
+  .resumo-individual .titulo-resumo{
+    grid-column: 1 / -1;
+    font-weight:800;
+    font-size:1rem;
+    margin:0 0 .2rem;
+    opacity:.9;
+    text-transform:uppercase;
+    letter-spacing:.05em;
+  }
+  .resumo-individual .item .valor{
     font-family:'Poppins',sans-serif;
     font-weight:800;
     font-size: 1.4rem;
     display:block;
   }
-  .resumo .item .rotulo{
-    font-size: .74rem;
+  .resumo-individual .item .rotulo{
+    font-size: .7rem;
     text-transform:uppercase;
     letter-spacing:.05em;
     opacity:.9;
@@ -451,7 +509,9 @@
   .acoes{
     display:flex;
     justify-content:center;
+    gap:1rem;
     margin-top: 1.1rem;
+    flex-wrap:wrap;
   }
   .btn-limpar{
     background:#fff;
@@ -466,6 +526,119 @@
   }
   .btn-limpar:active{ transform: scale(.97); }
 
+  .painel-financeiro{
+    background: var(--branco);
+    border: 2px solid var(--azul-claro-2);
+    border-radius: var(--raio);
+    box-shadow: var(--sombra);
+    margin-top: 1.5rem;
+    padding: 1.2rem 1.3rem;
+  }
+  .painel-financeiro h2{
+    font-family:'Poppins',sans-serif;
+    font-weight:800;
+    font-size: 1.05rem;
+    color: var(--azul-escuro);
+    margin: 0 0 1rem;
+  }
+  .financeiro-grade{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .8rem;
+    margin-bottom: 1rem;
+  }
+  .financeiro-item{
+    background: var(--azul-claro);
+    border-radius: 12px;
+    padding: .8rem .9rem;
+    text-align:center;
+  }
+  .financeiro-item .valor{
+    display:block;
+    font-family:'Poppins',sans-serif;
+    font-weight:800;
+    font-size: 1.15rem;
+    color: var(--azul-escuro);
+  }
+  .financeiro-item .rotulo{
+    font-size:.72rem;
+    font-weight:700;
+    color:#5C6B8A;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+  }
+  .financeiro-progresso{
+    background:#F3F5F9;
+    border-radius:999px;
+    height: .8rem;
+    overflow:hidden;
+    margin-bottom:.4rem;
+  }
+  .financeiro-progresso-barra{
+    height:100%;
+    background: linear-gradient(90deg, var(--azul-escuro), var(--azul-medio));
+    border-radius:999px;
+    transition: width .3s;
+  }
+  .financeiro-legenda{
+    font-size:.84rem;
+    color:#5C6B8A;
+    font-weight:600;
+    text-align:center;
+    margin: 0 0 1rem;
+  }
+  .btn-atualizar-financeiro{
+    display:block;
+    margin: 0 auto 1rem;
+    background:#fff;
+    border: 2px solid #C7D6ED;
+    color:#3D4C6B;
+    font-size:.88rem;
+    font-weight:700;
+    padding: .6rem 1.1rem;
+    border-radius:999px;
+    cursor:pointer;
+  }
+  .lista-pacotes{
+    display:flex;
+    flex-direction:column;
+    gap:.5rem;
+  }
+  .pacote-item{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:.6rem;
+    background:#FBFDFF;
+    border:1.5px solid var(--azul-claro-2);
+    border-radius:10px;
+    padding:.6rem .8rem;
+  }
+  .pacote-item.pago{
+    background:#F0FBF3;
+    border-color:#8CDDA6;
+  }
+  .pacote-item span.pacote-nome{
+    font-weight:700;
+    font-size:.92rem;
+    color: var(--texto-escuro);
+  }
+  .pacote-item label{
+    display:flex;
+    align-items:center;
+    gap:.4rem;
+    font-size:.85rem;
+    font-weight:700;
+    color:#3D4C6B;
+    cursor:pointer;
+  }
+  .pacote-item input[type="checkbox"]{
+    width:1.3rem;
+    height:1.3rem;
+    accent-color: #2E9B54;
+    cursor:pointer;
+  }
+
   footer.rodape-app{
     text-align:center;
     font-size: .82rem;
@@ -475,21 +648,28 @@
     line-height:1.5;
   }
 
+  @media (max-width: 34rem){
+    .grid-pacientes{
+      grid-template-columns: 1fr;
+    }
+    .resumo-duplo{
+      grid-template-columns: 1fr;
+    }
+    .fotos-pacientes{
+      gap:.8rem;
+    }
+  }
   @media (min-width: 34rem){
     .linha-dia{
-      grid-template-columns: 1.1fr 1.4fr auto;
-      align-items:center;
+      grid-template-columns: 1fr;
     }
-    .linha-cabeca{ flex-direction:column; align-items:flex-start; gap:.2rem; }
-    .campos{ grid-template-columns: 1fr 1fr; }
-    .rodape-linha{ flex-direction:column; align-items:flex-end; gap:.5rem; }
   }
 
   @media (prefers-reduced-motion: reduce){
     .pulso{ animation:none; }
   }
 
-  /* ---------- Tela de login ---------- */
+  /* Tela de login */
   .tela-login{
     min-height:100vh;
     display:flex;
@@ -613,119 +793,7 @@
     flex-shrink:0;
   }
 
-  /* ---------- Painel financeiro ---------- */
-  .painel-financeiro{
-    background: var(--branco);
-    border: 2px solid var(--azul-claro-2);
-    border-radius: var(--raio);
-    box-shadow: var(--sombra);
-    margin-top: 1.5rem;
-    padding: 1.2rem 1.3rem;
-  }
-  .painel-financeiro h2{
-    font-family:'Poppins',sans-serif;
-    font-weight:800;
-    font-size: 1.05rem;
-    color: var(--azul-escuro);
-    margin: 0 0 1rem;
-  }
-  .financeiro-grade{
-    display:grid;
-    grid-template-columns: 1fr 1fr;
-    gap: .8rem;
-    margin-bottom: 1rem;
-  }
-  .financeiro-item{
-    background: var(--azul-claro);
-    border-radius: 12px;
-    padding: .8rem .9rem;
-    text-align:center;
-  }
-  .financeiro-item .valor{
-    display:block;
-    font-family:'Poppins',sans-serif;
-    font-weight:800;
-    font-size: 1.15rem;
-    color: var(--azul-escuro);
-  }
-  .financeiro-item .rotulo{
-    font-size:.72rem;
-    font-weight:700;
-    color:#5C6B8A;
-    text-transform:uppercase;
-    letter-spacing:.04em;
-  }
-  .financeiro-progresso{
-    background:#F3F5F9;
-    border-radius:999px;
-    height: .8rem;
-    overflow:hidden;
-    margin-bottom:.4rem;
-  }
-  .financeiro-progresso-barra{
-    height:100%;
-    background: linear-gradient(90deg, var(--azul-escuro), var(--azul-medio));
-    border-radius:999px;
-    transition: width .3s;
-  }
-  .financeiro-legenda{
-    font-size:.84rem;
-    color:#5C6B8A;
-    font-weight:600;
-    text-align:center;
-    margin: 0 0 1rem;
-  }
-  .btn-atualizar-financeiro{
-    display:block;
-    margin: 0 auto 1rem;
-    background:#fff;
-    border: 2px solid #C7D6ED;
-    color:#3D4C6B;
-    font-size:.88rem;
-    font-weight:700;
-    padding: .6rem 1.1rem;
-    border-radius:999px;
-    cursor:pointer;
-  }
-  .lista-pacotes{
-    display:flex;
-    flex-direction:column;
-    gap:.5rem;
-  }
-  .pacote-item{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:.6rem;
-    background:#FBFDFF;
-    border:1.5px solid var(--azul-claro-2);
-    border-radius:10px;
-    padding:.6rem .8rem;
-  }
-  .pacote-item.pago{
-    background:#F0FBF3;
-    border-color:#8CDDA6;
-  }
-  .pacote-item span.pacote-nome{
-    font-weight:700;
-    font-size:.92rem;
-    color: var(--texto-escuro);
-  }
-  .pacote-item label{
-    display:flex;
-    align-items:center;
-    gap:.4rem;
-    font-size:.85rem;
-    font-weight:700;
-    color:#3D4C6B;
-    cursor:pointer;
-  }
-  .pacote-item input[type="checkbox"]{
-    width:1.3rem;
-    height:1.3rem;
-    accent-color: #2E9B54;
-    cursor:pointer;
-  }
+  .escondido{ display:none !important; }
 </style>
 </head>
 <body>
@@ -750,18 +818,32 @@
   </div>
 </div>
 
-<div id="appConteudo" hidden>
+<div id="appConteudo" class="escondido">
 
 <header class="topo">
   <div class="barra-superior">
     <div>
       <p class="eyebrow">Registro de atendimento</p>
-      <h1 class="nome">Fisioterapeuta Andressa</h1>
+      <h1 class="nome">Andressa</h1>
+      <p class="subtitulo-header">Fisioterapeuta</p>
     </div>
     <div class="controle-texto" role="group" aria-label="Tamanho do texto">
       <button type="button" id="btnDiminuirTexto" aria-label="Diminuir tamanho do texto">A−</button>
       <button type="button" id="btnAumentarTexto" aria-label="Aumentar tamanho do texto">A+</button>
     </div>
+  </div>
+
+  <!-- Fotos dos pacientes -->
+  <div class="fotos-pacientes">
+    <div class="foto-paciente">
+      <img src="https://via.placeholder.com/100/9D174D/FFFFFF?text=José" alt="Foto de José" id="fotoJose">
+      <span>José</span>
+    </div>
+    <div class="foto-paciente">
+      <img src="https://via.placeholder.com/100/DB2777/FFFFFF?text=Cirene" alt="Foto de Cirene" id="fotoCirene">
+      <span>Cirene</span>
+    </div>
+    <span style="font-size:.75rem;opacity:.7;margin-left:auto;">Sessão conjunta</span>
   </div>
 
   <div class="navegador-mes">
@@ -789,51 +871,45 @@
     <span class="pulso" aria-hidden="true"></span>
   </div>
 
-  <section class="bloco-paciente" data-paciente="jose">
-    <p class="titulo-paciente"><span class="ponto-cor"></span> José</p>
-    <div class="lista-dias" id="listaDias-jose"></div>
+  <!-- Bloco único com os dois pacientes -->
+  <section class="bloco-unico">
+    <div class="lista-dias" id="listaDiasUnica"></div>
 
-    <div class="resumo">
-      <div class="item">
-        <span class="valor" id="totalDias-jose">0</span>
-        <span class="rotulo">Sessões realizadas</span>
+    <div class="resumo-duplo">
+      <div class="resumo-individual" id="resumoJose">
+        <p class="titulo-resumo">🧑 José</p>
+        <div class="item">
+          <span class="valor" id="totalDias-jose">0</span>
+          <span class="rotulo">Sessões</span>
+        </div>
+        <div class="item">
+          <span class="valor" id="totalFaltas-jose">0</span>
+          <span class="rotulo">Faltas</span>
+        </div>
+        <div class="item">
+          <span class="valor" id="totalHoras-jose">0h</span>
+          <span class="rotulo">Horas</span>
+        </div>
       </div>
-      <div class="item">
-        <span class="valor" id="totalFaltas-jose">0</span>
-        <span class="rotulo">Faltas</span>
-      </div>
-      <div class="item">
-        <span class="valor" id="totalHoras-jose">0h</span>
-        <span class="rotulo">Horas no mês</span>
+      <div class="resumo-individual" id="resumoCirene">
+        <p class="titulo-resumo">👩 Cirene</p>
+        <div class="item">
+          <span class="valor" id="totalDias-cirene">0</span>
+          <span class="rotulo">Sessões</span>
+        </div>
+        <div class="item">
+          <span class="valor" id="totalFaltas-cirene">0</span>
+          <span class="rotulo">Faltas</span>
+        </div>
+        <div class="item">
+          <span class="valor" id="totalHoras-cirene">0h</span>
+          <span class="rotulo">Horas</span>
+        </div>
       </div>
     </div>
 
     <div class="acoes">
-      <button class="btn-limpar" data-limpar="jose">Limpar mês de José</button>
-    </div>
-  </section>
-
-  <section class="bloco-paciente" data-paciente="cirene">
-    <p class="titulo-paciente"><span class="ponto-cor"></span> Cirene</p>
-    <div class="lista-dias" id="listaDias-cirene"></div>
-
-    <div class="resumo">
-      <div class="item">
-        <span class="valor" id="totalDias-cirene">0</span>
-        <span class="rotulo">Sessões realizadas</span>
-      </div>
-      <div class="item">
-        <span class="valor" id="totalFaltas-cirene">0</span>
-        <span class="rotulo">Faltas</span>
-      </div>
-      <div class="item">
-        <span class="valor" id="totalHoras-cirene">0h</span>
-        <span class="rotulo">Horas no mês</span>
-      </div>
-    </div>
-
-    <div class="acoes">
-      <button class="btn-limpar" data-limpar="cirene">Limpar mês de Cirene</button>
+      <button class="btn-limpar" id="btnLimparMes">🗑️ Limpar mês inteiro (ambos)</button>
     </div>
   </section>
 
@@ -870,33 +946,18 @@
 </div><!-- fim de #appConteudo -->
 
 <script type="module">
-  // Os módulos do Firebase são carregados de forma assíncrona mais abaixo,
-  // para que a página (lista de terças/quintas, seletor de paciente, etc.)
-  // sempre apareça normalmente, mesmo que o carregamento do Firebase demore
-  // ou falhe por qualquer motivo de rede.
-
   const firebaseConfig = {
-     apiKey: "AIzaSyCTz0F4JdjBVzefsfFkx6oH4wGUPhYKDqM",
-  authDomain: "ponto-andressa-22julho.firebaseapp.com",
-  projectId: "ponto-andressa-22julho",
-  storageBucket: "ponto-andressa-22julho.firebasestorage.app",
-  messagingSenderId: "583781251325",
-  appId: "1:583781251325:web:b2d722c0ea4a1936fca694"
+    apiKey: "AIzaSyCTz0F4JdjBVzefsfFkx6oH4wGUPhYKDqM",
+    authDomain: "ponto-andressa-22julho.firebaseapp.com",
+    projectId: "ponto-andressa-22julho",
+    storageBucket: "ponto-andressa-22julho.firebasestorage.app",
+    messagingSenderId: "583781251325",
+    appId: "1:583781251325:web:b2d722c0ea4a1936fca694"
   };
 
   const HORARIO_PADRAO_ENTRADA = "14:00";
   const HORARIO_PADRAO_SAIDA = "15:30";
-
-  // Código exigido para apagar os registros de um mês.
-  // Troque "1234" por um código só seu antes de publicar o site.
   const CODIGO_PARA_LIMPAR = "1234";
-
-  const PACIENTES = ['jose', 'cirene'];
-  const NOMES_PACIENTES = { jose: 'José', cirene: 'Cirene' };
-
-  // ---------- Valores financeiros ----------
-  // Cada sessão (José e Cirene juntos, no mesmo horário) vale R$170,00.
-  // A cada 10 sessões, é cobrado um pacote de R$1.700,00.
   const VALOR_SESSAO = 170;
   const TAMANHO_PACOTE = 10;
   const VALOR_PACOTE = VALOR_SESSAO * TAMANHO_PACOTE;
@@ -910,27 +971,25 @@
 
   const hoje = new Date();
   const anoAtual = hoje.getFullYear();
-  const mesAtual = hoje.getMonth(); // 0-11
+  const mesAtual = hoje.getMonth();
   const hojeISO = formatarISO(hoje);
 
   function formatarISO(d){
     return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
   }
 
-  // ---------- Controle de tamanho de texto (acessibilidade) ----------
+  // Controle de tamanho de texto
   const NIVEIS_TEXTO = [100, 112.5, 125, 137.5, 150];
   let indiceTexto = 1;
   try{
     const salvo = localStorage.getItem('ponto-tamanho-texto');
     if(salvo !== null) indiceTexto = Math.min(Math.max(parseInt(salvo,10) || 1, 0), NIVEIS_TEXTO.length-1);
-  }catch(e){ /* ignora */ }
-
+  }catch(e){}
   function aplicarTamanhoTexto(){
     document.documentElement.style.fontSize = NIVEIS_TEXTO[indiceTexto] + '%';
     try{ localStorage.setItem('ponto-tamanho-texto', String(indiceTexto)); }catch(e){}
   }
   aplicarTamanhoTexto();
-
   document.getElementById('btnAumentarTexto').addEventListener('click', () => {
     indiceTexto = Math.min(indiceTexto+1, NIVEIS_TEXTO.length-1);
     aplicarTamanhoTexto();
@@ -940,17 +999,17 @@
     aplicarTamanhoTexto();
   });
 
-  // ---------- Lista de meses disponíveis: janeiro de 2026 até o mês atual ----------
+  // Lista de meses: janeiro 2026 até atual
   const listaMeses = [];
   {
-    let a = 2026, m = 0; // janeiro de 2026
+    let a = 2026, m = 0;
     while(a < anoAtual || (a === anoAtual && m <= mesAtual)){
       listaMeses.push({ano:a, mes:m});
       m++;
       if(m > 11){ m = 0; a++; }
     }
   }
-  let indiceMesSelecionado = listaMeses.length - 1; // mês atual por padrão
+  let indiceMesSelecionado = listaMeses.length - 1;
 
   const seletorMes = document.getElementById('seletorMes');
   listaMeses.forEach((item, i) => {
@@ -963,7 +1022,6 @@
 
   const btnMesAnterior = document.getElementById('btnMesAnterior');
   const btnMesSeguinte = document.getElementById('btnMesSeguinte');
-
   function atualizarBotoesMes(){
     btnMesAnterior.disabled = indiceMesSelecionado <= 0;
     btnMesSeguinte.disabled = indiceMesSelecionado >= listaMeses.length - 1;
@@ -989,170 +1047,29 @@
     trocarMes();
   });
 
-  // ---------- Firebase ----------
+  // Firebase
   const statusEl = document.getElementById('statusSync');
   const telaLoginEl = document.getElementById('telaLogin');
   const appConteudoEl = document.getElementById('appConteudo');
   const erroLoginEl = document.getElementById('erroLogin');
   const btnEntrarEl = document.getElementById('btnEntrar');
   let db;
-  let diasUteis = [];
   let usuarioAutenticado = null;
-  let authFns = null; // { auth, signInWithEmailAndPassword, sendPasswordResetEmail, signOut }
-
-  // Estado independente para cada paciente: dados salvos, referência do documento,
-  // função para cancelar a inscrição em tempo real, e status de sincronização.
-  const estado = {};
-  PACIENTES.forEach(p => {
-    estado[p] = { dados: {}, pronto: false, docRef: null, cancelarInscricao: null, status: 'carregando' };
-  });
-
-  const configuracaoPendente = firebaseConfig.apiKey === "SUA_API_KEY_AQUI";
+  let authFns = null;
   let firestoreOk = false;
   let fnDoc, fnSetDoc, fnOnSnapshot, fnGetDoc;
-
-  function mensagemErroAuth(codigo){
-    const mapa = {
-      'auth/invalid-email': 'E-mail inválido.',
-      'auth/user-not-found': 'Não encontramos uma conta com esse e-mail.',
-      'auth/wrong-password': 'Senha incorreta.',
-      'auth/invalid-credential': 'E-mail ou senha incorretos.',
-      'auth/too-many-requests': 'Muitas tentativas. Aguarde alguns minutos e tente de novo.',
-      'auth/network-request-failed': 'Sem conexão com a internet.'
-    };
-    return mapa[codigo] || 'Não foi possível entrar. Tente novamente.';
-  }
-
-  async function iniciarFirebase(){
-    if(configuracaoPendente){
-      const msg = 'Firebase ainda não configurado — veja o README';
-      statusEl.textContent = msg;
-      statusEl.classList.add('erro');
-      erroLoginEl.textContent = msg;
-      btnEntrarEl.disabled = true;
-      return;
-    }
-    try{
-      const [{ initializeApp }, { getFirestore, doc, setDoc, onSnapshot, getDoc }, authMod] = await Promise.all([
-        import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"),
-        import("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"),
-        import("https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js")
-      ]);
-      fnDoc = doc;
-      fnSetDoc = setDoc;
-      fnOnSnapshot = onSnapshot;
-      fnGetDoc = getDoc;
-      const app = initializeApp(firebaseConfig);
-      db = getFirestore(app);
-      firestoreOk = true;
-
-      const auth = authMod.getAuth(app);
-      authFns = {
-        auth,
-        signInWithEmailAndPassword: authMod.signInWithEmailAndPassword,
-        sendPasswordResetEmail: authMod.sendPasswordResetEmail,
-        signOut: authMod.signOut
-      };
-
-      authMod.onAuthStateChanged(auth, (user) => {
-        usuarioAutenticado = user;
-        if(user){
-          telaLoginEl.hidden = true;
-          appConteudoEl.hidden = false;
-          document.getElementById('emailLogado').textContent = user.email || '';
-          erroLoginEl.textContent = '';
-          PACIENTES.forEach(p => conectarFirestorePaciente(p));
-          conectarPagamentos();
-          recalcularFinanceiro();
-        } else {
-          telaLoginEl.hidden = false;
-          appConteudoEl.hidden = true;
-          PACIENTES.forEach(p => {
-            const est = estado[p];
-            if(est.cancelarInscricao){ est.cancelarInscricao(); est.cancelarInscricao = null; }
-          });
-          if(cancelarInscricaoPagamentos){ cancelarInscricaoPagamentos(); cancelarInscricaoPagamentos = null; }
-        }
-      });
-    }catch(e){
-      console.error('Erro ao iniciar Firebase:', e);
-      const msg = 'Sem conexão com o Firebase — verifique a internet';
-      statusEl.textContent = msg;
-      statusEl.classList.add('erro');
-      erroLoginEl.textContent = msg;
-    }
-  }
-
-  // ---------- Formulário de login ----------
-  document.getElementById('formLogin').addEventListener('submit', async (ev) => {
-    ev.preventDefault();
-    erroLoginEl.textContent = '';
-    if(!authFns){
-      erroLoginEl.textContent = 'Aguarde o carregamento do sistema e tente novamente.';
-      return;
-    }
-    const email = document.getElementById('campoEmailLogin').value.trim();
-    const senha = document.getElementById('campoSenhaLogin').value;
-    btnEntrarEl.disabled = true;
-    btnEntrarEl.textContent = 'Entrando…';
-    try{
-      await authFns.signInWithEmailAndPassword(authFns.auth, email, senha);
-    }catch(e){
-      console.error('Erro de login:', e);
-      erroLoginEl.textContent = mensagemErroAuth(e.code);
-    }finally{
-      btnEntrarEl.disabled = false;
-      btnEntrarEl.textContent = 'Entrar';
-    }
-  });
-
-  document.getElementById('btnEsqueciSenha').addEventListener('click', async () => {
-    const email = document.getElementById('campoEmailLogin').value.trim();
-    if(!email){
-      erroLoginEl.textContent = 'Digite seu e-mail no campo acima e toque em "Esqueci minha senha" de novo.';
-      return;
-    }
-    if(!authFns){
-      erroLoginEl.textContent = 'Aguarde o carregamento do sistema e tente novamente.';
-      return;
-    }
-    try{
-      await authFns.sendPasswordResetEmail(authFns.auth, email);
-      erroLoginEl.textContent = 'E-mail de redefinição enviado — confira sua caixa de entrada.';
-    }catch(e){
-      console.error('Erro ao redefinir senha:', e);
-      erroLoginEl.textContent = mensagemErroAuth(e.code);
-    }
-  });
-
-  document.getElementById('btnSair').addEventListener('click', () => {
-    if(authFns) authFns.signOut(authFns.auth);
-  });
-
-  function idDocumentoPara(paciente, ano, mes){
-    return `andressa-${paciente}-${ano}-${String(mes+1).padStart(2,'0')}`;
-  }
-
-  function gerarDiasUteis(ano, mes){
-    const lista = [];
-    const totalDiasNoMes = new Date(ano, mes+1, 0).getDate();
-    for(let dia=1; dia<=totalDiasNoMes; dia++){
-      const d = new Date(ano, mes, dia);
-      const diaSemana = d.getDay();
-      // Atendimentos apenas às terças (2) e quintas (4)
-      if(diaSemana === 2 || diaSemana === 4) lista.push(d);
-    }
-    return lista;
-  }
+  let cancelarInscricao = null;
+  let dadosSessao = {};
+  let docRef = null;
+  let statusSync = 'carregando';
 
   function atualizarStatusGeral(){
-    const valores = PACIENTES.map(p => estado[p].status);
-    if(valores.every(v => v === 'ok')){
-      statusEl.textContent = 'Sincronizado — todos veem os mesmos registros';
+    if(statusSync === 'ok'){
+      statusEl.textContent = 'Sincronizado';
       statusEl.classList.remove('erro');
       statusEl.classList.add('ok');
-    } else if(valores.some(v => v === 'erro')){
-      statusEl.textContent = 'Sem conexão com o banco de dados';
+    } else if(statusSync === 'erro'){
+      statusEl.textContent = 'Sem conexão com o banco';
       statusEl.classList.remove('ok');
       statusEl.classList.add('erro');
     } else {
@@ -1161,22 +1078,36 @@
     }
   }
 
-  function conectarFirestorePaciente(paciente){
+  function gerarDiasUteis(ano, mes){
+    const lista = [];
+    const totalDiasNoMes = new Date(ano, mes+1, 0).getDate();
+    for(let dia=1; dia<=totalDiasNoMes; dia++){
+      const d = new Date(ano, mes, dia);
+      const diaSemana = d.getDay();
+      if(diaSemana === 2 || diaSemana === 4) lista.push(d);
+    }
+    return lista;
+  }
+
+  let diasUteis = [];
+  function idDocumento(ano, mes){
+    return `andressa-sessao-${ano}-${String(mes+1).padStart(2,'0')}`;
+  }
+
+  function conectarFirestore(){
     if(!firestoreOk || !usuarioAutenticado) return;
     const {ano, mes} = listaMeses[indiceMesSelecionado];
-    const est = estado[paciente];
-    if(est.cancelarInscricao){ est.cancelarInscricao(); est.cancelarInscricao = null; }
-    est.docRef = fnDoc(db, 'pontos', idDocumentoPara(paciente, ano, mes));
-    est.cancelarInscricao = fnOnSnapshot(est.docRef, (snap) => {
-      est.dados = (snap.exists() && snap.data().dias) ? snap.data().dias : {};
-      est.pronto = true;
-      est.status = 'ok';
+    if(cancelarInscricao){ cancelarInscricao(); cancelarInscricao = null; }
+    docRef = fnDoc(db, 'pontos', idDocumento(ano, mes));
+    cancelarInscricao = fnOnSnapshot(docRef, (snap) => {
+      dadosSessao = (snap.exists() && snap.data().dias) ? snap.data().dias : {};
+      statusSync = 'ok';
       atualizarStatusGeral();
-      renderizarPaciente(paciente);
+      renderizarDias();
       rolarParaHojeSeNecessario();
     }, (erro) => {
-      console.error(`Erro de sincronização (${paciente}):`, erro);
-      est.status = 'erro';
+      console.error('Erro de sincronização:', erro);
+      statusSync = 'erro';
       atualizarStatusGeral();
     });
   }
@@ -1197,42 +1128,35 @@
       avisoEl.textContent = `Você está vendo ${MESES[mes]} de ${ano}. Os registros deste mês continuam podendo ser editados.`;
     }
 
-    PACIENTES.forEach(p => {
-      const est = estado[p];
-      if(est.cancelarInscricao){ est.cancelarInscricao(); est.cancelarInscricao = null; }
-      est.dados = {};
-      est.pronto = false;
-      est.status = 'carregando';
-      renderizarPaciente(p);
-    });
+    dadosSessao = {};
+    if(cancelarInscricao){ cancelarInscricao(); cancelarInscricao = null; }
+    renderizarDias();
+    statusSync = 'carregando';
     atualizarStatusGeral();
-
-    PACIENTES.forEach(p => conectarFirestorePaciente(p));
+    conectarFirestore();
   }
 
-  // ---------- Financeiro ----------
+  // Financeiro
   let cancelarInscricaoPagamentos = null;
   let pagamentosDocRef = null;
-  let pagamentos = {}; // { "1": true, "2": false, ... } — pacote de 10 sessões pago ou não
+  let pagamentos = {};
   let totalSessoesAcumuladas = 0;
 
-  function contarSessoesCobraveis(diasDoMes, diasJose, diasCirene){
+  function contarSessoesCobraveis(diasDoMes, dados){
     let total = 0;
     diasDoMes.forEach(d => {
       const iso = formatarISO(d);
-      const rJose = diasJose[iso];
-      const rCirene = diasCirene[iso];
-      const faltouJose = rJose ? !!rJose.falta : false;
-      const faltouCirene = rCirene ? !!rCirene.falta : false;
-      // Conta como sessão cobrável (R$170) se pelo menos um dos dois foi atendido,
-      // já que José e Cirene são atendidos juntos, no mesmo horário.
+      const reg = dados[iso];
+      if(!reg) return;
+      const faltouJose = !!reg.faltaJose;
+      const faltouCirene = !!reg.faltaCirene;
       if(!(faltouJose && faltouCirene)) total++;
     });
     return total;
   }
 
   function atualizarFinanceiroMes(){
-    const total = contarSessoesCobraveis(diasUteis, estado.jose.dados, estado.cirene.dados);
+    const total = contarSessoesCobraveis(diasUteis, dadosSessao);
     document.getElementById('finSessoesMes').textContent = total;
     document.getElementById('finValorMes').textContent = formatarMoeda(total * VALOR_SESSAO);
   }
@@ -1245,12 +1169,10 @@
       let totalGeral = 0;
       for(const {ano, mes} of listaMeses){
         const diasDoMes = gerarDiasUteis(ano, mes);
-        const refJose = fnDoc(db, 'pontos', idDocumentoPara('jose', ano, mes));
-        const refCirene = fnDoc(db, 'pontos', idDocumentoPara('cirene', ano, mes));
-        const [snapJose, snapCirene] = await Promise.all([fnGetDoc(refJose), fnGetDoc(refCirene)]);
-        const diasJose = (snapJose.exists() && snapJose.data().dias) ? snapJose.data().dias : {};
-        const diasCirene = (snapCirene.exists() && snapCirene.data().dias) ? snapCirene.data().dias : {};
-        totalGeral += contarSessoesCobraveis(diasDoMes, diasJose, diasCirene);
+        const ref = fnDoc(db, 'pontos', idDocumento(ano, mes));
+        const snap = await fnGetDoc(ref);
+        const dados = (snap.exists() && snap.data().dias) ? snap.data().dias : {};
+        totalGeral += contarSessoesCobraveis(diasDoMes, dados);
       }
       totalSessoesAcumuladas = totalGeral;
       renderizarFinanceiroGeral();
@@ -1335,21 +1257,16 @@
 
   document.getElementById('btnAtualizarFinanceiro').addEventListener('click', recalcularFinanceiro);
 
-  async function salvarDia(paciente, iso, registro){
-    const est = estado[paciente];
-    if(!firestoreOk || !est.docRef) return;
+  async function salvarDia(iso, registro){
+    if(!firestoreOk || !docRef) return;
     try{
-      await fnSetDoc(est.docRef, { dias: { [iso]: registro } }, { merge: true });
+      await fnSetDoc(docRef, { dias: { [iso]: registro } }, { merge: true });
     }catch(e){
       console.error('Erro ao salvar:', e);
-      statusEl.textContent = 'Não foi possível salvar agora — tente de novo';
-      statusEl.classList.remove('ok');
-      statusEl.classList.add('erro');
+      statusSync = 'erro';
+      atualizarStatusGeral();
     }
   }
-
-  document.getElementById('dataHojeTexto').textContent =
-    `${DIAS_SEMANA[hoje.getDay()].charAt(0).toUpperCase()+DIAS_SEMANA[hoje.getDay()].slice(1)}, ${hoje.getDate()} de ${MESES[mesAtual]}`;
 
   function calcularHoras(entrada, saida){
     if(!entrada || !saida) return null;
@@ -1362,33 +1279,31 @@
     return {texto: `${horas}h${restoMin ? String(restoMin).padStart(2,'0') : ''}`, minutos};
   }
 
-  const listaEls = {
-    jose: document.getElementById('listaDias-jose'),
-    cirene: document.getElementById('listaDias-cirene')
-  };
-
-  function renderizarPaciente(paciente){
-    const listaEl = listaEls[paciente];
-    const est = estado[paciente];
+  function renderizarDias(){
+    const listaEl = document.getElementById('listaDiasUnica');
     listaEl.innerHTML = '';
-    let minutosTotais = 0;
-    let diasTrabalhados = 0;
-    let totalFaltas = 0;
+    let minutosJose = 0, minutosCirene = 0;
+    let diasJose = 0, diasCirene = 0;
+    let faltasJose = 0, faltasCirene = 0;
 
     diasUteis.forEach(d => {
       const iso = formatarISO(d);
-      const salvo = est.dados[iso];
-      const registro = salvo || {
+      const salvo = dadosSessao[iso];
+      const reg = salvo || {
         entrada: HORARIO_PADRAO_ENTRADA,
         saida: HORARIO_PADRAO_SAIDA,
-        falta: false,
-        observacao: ''
+        faltaJose: false,
+        faltaCirene: false,
+        obsJose: '',
+        obsCirene: ''
       };
       const ehHoje = iso === hojeISO;
 
       const linha = document.createElement('div');
-      linha.className = 'linha-dia' + (ehHoje ? ' hoje' : '') + (registro.falta ? ' falta' : '');
-      linha.id = ehHoje ? `linhaHoje-${paciente}` : '';
+      linha.className = 'linha-dia' + (ehHoje ? ' hoje' : '');
+      if(reg.faltaJose) linha.classList.add('falta-jose');
+      if(reg.faltaCirene) linha.classList.add('falta-cirene');
+      linha.id = ehHoje ? 'linhaHoje' : '';
 
       const cabeca = document.createElement('div');
       cabeca.className = 'linha-cabeca';
@@ -1398,170 +1313,293 @@
         ${ehHoje ? '<span class="tag-hoje">Hoje</span>' : ''}
       `;
 
-      const campos = document.createElement('div');
-      campos.className = 'campos';
+      // Horários (compartilhados)
+      const camposHorarios = document.createElement('div');
+      camposHorarios.className = 'campos';
+      camposHorarios.style.marginBottom = '.5rem';
 
-      const campoEntrada = document.createElement('div');
-      campoEntrada.className = 'campo';
-      const rotuloEntrada = document.createElement('label');
-      rotuloEntrada.textContent = 'Entrada';
-      const inputEntrada = document.createElement('input');
-      inputEntrada.type = 'time';
-      inputEntrada.value = registro.entrada || HORARIO_PADRAO_ENTRADA;
-      inputEntrada.disabled = registro.falta;
-      inputEntrada.setAttribute('aria-label', `Horário de entrada do dia ${d.getDate()} — ${NOMES_PACIENTES[paciente]}`);
-      inputEntrada.addEventListener('change', () => {
-        atualizarRegistro(paciente, iso, {entrada: inputEntrada.value});
+      const cEntrada = document.createElement('div');
+      cEntrada.className = 'campo';
+      const lEntrada = document.createElement('label');
+      lEntrada.textContent = 'Entrada';
+      const iEntrada = document.createElement('input');
+      iEntrada.type = 'time';
+      iEntrada.value = reg.entrada || HORARIO_PADRAO_ENTRADA;
+      iEntrada.disabled = (reg.faltaJose && reg.faltaCirene);
+      iEntrada.addEventListener('change', () => {
+        atualizarRegistro(iso, {entrada: iEntrada.value});
       });
-      campoEntrada.appendChild(rotuloEntrada);
-      campoEntrada.appendChild(inputEntrada);
+      cEntrada.appendChild(lEntrada);
+      cEntrada.appendChild(iEntrada);
 
-      const campoSaida = document.createElement('div');
-      campoSaida.className = 'campo';
-      const rotuloSaida = document.createElement('label');
-      rotuloSaida.textContent = 'Saída';
-      const inputSaida = document.createElement('input');
-      inputSaida.type = 'time';
-      inputSaida.value = registro.saida || HORARIO_PADRAO_SAIDA;
-      inputSaida.disabled = registro.falta;
-      inputSaida.setAttribute('aria-label', `Horário de saída do dia ${d.getDate()} — ${NOMES_PACIENTES[paciente]}`);
-      inputSaida.addEventListener('change', () => {
-        atualizarRegistro(paciente, iso, {saida: inputSaida.value});
+      const cSaida = document.createElement('div');
+      cSaida.className = 'campo';
+      const lSaida = document.createElement('label');
+      lSaida.textContent = 'Saída';
+      const iSaida = document.createElement('input');
+      iSaida.type = 'time';
+      iSaida.value = reg.saida || HORARIO_PADRAO_SAIDA;
+      iSaida.disabled = (reg.faltaJose && reg.faltaCirene);
+      iSaida.addEventListener('change', () => {
+        atualizarRegistro(iso, {saida: iSaida.value});
       });
-      campoSaida.appendChild(rotuloSaida);
-      campoSaida.appendChild(inputSaida);
+      cSaida.appendChild(lSaida);
+      cSaida.appendChild(iSaida);
 
-      campos.appendChild(campoEntrada);
-      campos.appendChild(campoSaida);
+      camposHorarios.appendChild(cEntrada);
+      camposHorarios.appendChild(cSaida);
 
-      const campoObs = document.createElement('div');
-      campoObs.className = 'campo-observacao';
-      const rotuloObs = document.createElement('label');
-      rotuloObs.textContent = 'Observações / intercorrências';
-      const areaObs = document.createElement('textarea');
-      areaObs.rows = 2;
-      areaObs.placeholder = 'Ex: dificuldade no exercício, dor relatada, pressão alta, etc.';
-      areaObs.value = registro.observacao || '';
-      areaObs.setAttribute('aria-label', `Observações do dia ${d.getDate()} — ${NOMES_PACIENTES[paciente]}`);
-      let temporizadorObs = null;
-      areaObs.addEventListener('input', () => {
-        clearTimeout(temporizadorObs);
-        temporizadorObs = setTimeout(() => {
-          atualizarRegistro(paciente, iso, {observacao: areaObs.value}, {semRenderizar: true});
+      // Colunas José e Cirene
+      const gridPacientes = document.createElement('div');
+      gridPacientes.className = 'grid-pacientes';
+
+      // Coluna José
+      const colJose = document.createElement('div');
+      colJose.className = 'paciente-coluna';
+      colJose.innerHTML = `
+        <p class="nome-coluna"><img class="mini-foto" src="https://via.placeholder.com/100/9D174D/FFFFFF?text=José" alt=""> José</p>
+        <div class="campo-observacao">
+          <label>Observações</label>
+          <textarea rows="2" placeholder="Intercorrências, dor, etc.">${reg.obsJose || ''}</textarea>
+        </div>
+        <label class="falta-toggle">
+          <input type="checkbox" ${reg.faltaJose ? 'checked' : ''}> Falta
+        </label>
+      `;
+      const obsJose = colJose.querySelector('textarea');
+      let timerJose = null;
+      obsJose.addEventListener('input', () => {
+        clearTimeout(timerJose);
+        timerJose = setTimeout(() => {
+          atualizarRegistro(iso, {obsJose: obsJose.value}, {semRenderizar: true});
         }, 500);
       });
-      campoObs.appendChild(rotuloObs);
-      campoObs.appendChild(areaObs);
-      campos.appendChild(campoObs);
-
-      const rodapeLinha = document.createElement('div');
-      rodapeLinha.className = 'rodape-linha';
-
-      const faltaLabel = document.createElement('label');
-      faltaLabel.className = 'falta-toggle';
-      const faltaCheckbox = document.createElement('input');
-      faltaCheckbox.type = 'checkbox';
-      faltaCheckbox.checked = !!registro.falta;
-      faltaCheckbox.setAttribute('aria-label', `Marcar falta no dia ${d.getDate()} — ${NOMES_PACIENTES[paciente]}`);
-      faltaCheckbox.addEventListener('change', () => {
-        atualizarRegistro(paciente, iso, {falta: faltaCheckbox.checked});
+      const chkFaltaJose = colJose.querySelector('input[type="checkbox"]');
+      chkFaltaJose.addEventListener('change', () => {
+        atualizarRegistro(iso, {faltaJose: chkFaltaJose.checked});
       });
-      faltaLabel.appendChild(faltaCheckbox);
-      faltaLabel.appendChild(document.createTextNode('Falta'));
 
-      const horasCalculadas = registro.falta ? null : calcularHoras(registro.entrada, registro.saida);
+      // Coluna Cirene
+      const colCirene = document.createElement('div');
+      colCirene.className = 'paciente-coluna';
+      colCirene.innerHTML = `
+        <p class="nome-coluna"><img class="mini-foto" src="https://via.placeholder.com/100/DB2777/FFFFFF?text=Cirene" alt=""> Cirene</p>
+        <div class="campo-observacao">
+          <label>Observações</label>
+          <textarea rows="2" placeholder="Intercorrências, dor, etc.">${reg.obsCirene || ''}</textarea>
+        </div>
+        <label class="falta-toggle">
+          <input type="checkbox" ${reg.faltaCirene ? 'checked' : ''}> Falta
+        </label>
+      `;
+      const obsCirene = colCirene.querySelector('textarea');
+      let timerCirene = null;
+      obsCirene.addEventListener('input', () => {
+        clearTimeout(timerCirene);
+        timerCirene = setTimeout(() => {
+          atualizarRegistro(iso, {obsCirene: obsCirene.value}, {semRenderizar: true});
+        }, 500);
+      });
+      const chkFaltaCirene = colCirene.querySelector('input[type="checkbox"]');
+      chkFaltaCirene.addEventListener('change', () => {
+        atualizarRegistro(iso, {faltaCirene: chkFaltaCirene.checked});
+      });
+
+      gridPacientes.appendChild(colJose);
+      gridPacientes.appendChild(colCirene);
+
+      // Horas totais do dia (compartilhado, só aparece se ambos não faltarem)
+      const horasCalculadas = (reg.faltaJose && reg.faltaCirene) ? null : calcularHoras(reg.entrada, reg.saida);
+      const rodape = document.createElement('div');
+      rodape.style.display = 'flex';
+      rodape.style.justifyContent = 'flex-end';
+      rodape.style.marginTop = '.3rem';
       const horasSpan = document.createElement('span');
       horasSpan.className = 'horas-dia' + (horasCalculadas ? '' : ' vazio');
-      horasSpan.textContent = registro.falta ? 'Falta' : (horasCalculadas ? horasCalculadas.texto : '—');
-
-      rodapeLinha.appendChild(faltaLabel);
-      rodapeLinha.appendChild(horasSpan);
+      horasSpan.textContent = (reg.faltaJose && reg.faltaCirene) ? 'Ambos faltaram' : (horasCalculadas ? horasCalculadas.texto : '—');
+      rodape.appendChild(horasSpan);
 
       linha.appendChild(cabeca);
-      linha.appendChild(campos);
-      linha.appendChild(rodapeLinha);
+      linha.appendChild(camposHorarios);
+      linha.appendChild(gridPacientes);
+      linha.appendChild(rodape);
       listaEl.appendChild(linha);
 
-      if(registro.falta){
-        totalFaltas++;
-      } else if(horasCalculadas){
-        diasTrabalhados++;
-        minutosTotais += horasCalculadas.minutos;
+      // Estatísticas
+      if(!reg.faltaJose && horasCalculadas){
+        diasJose++;
+        minutosJose += horasCalculadas.minutos;
       }
+      if(reg.faltaJose) faltasJose++;
+
+      if(!reg.faltaCirene && horasCalculadas){
+        diasCirene++;
+        minutosCirene += horasCalculadas.minutos;
+      }
+      if(reg.faltaCirene) faltasCirene++;
     });
 
-    document.getElementById(`totalDias-${paciente}`).textContent = diasTrabalhados;
-    document.getElementById(`totalFaltas-${paciente}`).textContent = totalFaltas;
-    const hTot = Math.floor(minutosTotais/60);
-    const mTot = minutosTotais % 60;
-    document.getElementById(`totalHoras-${paciente}`).textContent = `${hTot}h${mTot ? String(mTot).padStart(2,'0') : ''}`;
+    // Atualizar resumos
+    function atualizaResumo(id, dias, faltas, minutos){
+      document.getElementById(`totalDias-${id}`).textContent = dias;
+      document.getElementById(`totalFaltas-${id}`).textContent = faltas;
+      const h = Math.floor(minutos/60);
+      const m = minutos % 60;
+      document.getElementById(`totalHoras-${id}`).textContent = `${h}h${m ? String(m).padStart(2,'0') : ''}`;
+    }
+    atualizaResumo('jose', diasJose, faltasJose, minutosJose);
+    atualizaResumo('cirene', diasCirene, faltasCirene, minutosCirene);
 
     atualizarFinanceiroMes();
   }
 
-  function atualizarRegistro(paciente, iso, mudanca, opcoes = {}){
-    const est = estado[paciente];
-    const atual = est.dados[iso] || {
+  function atualizarRegistro(iso, mudanca, opcoes = {}){
+    const atual = dadosSessao[iso] || {
       entrada: HORARIO_PADRAO_ENTRADA,
       saida: HORARIO_PADRAO_SAIDA,
-      falta: false,
-      observacao: ''
+      faltaJose: false,
+      faltaCirene: false,
+      obsJose: '',
+      obsCirene: ''
     };
     const novo = {...atual, ...mudanca};
-    est.dados[iso] = novo; // atualização imediata na tela
-    if(!opcoes.semRenderizar){
-      renderizarPaciente(paciente);
-    }
-    salvarDia(paciente, iso, novo); // grava no Firestore; onSnapshot confirma para todos
+    dadosSessao[iso] = novo;
+    if(!opcoes.semRenderizar) renderizarDias();
+    salvarDia(iso, novo);
   }
-
-  document.querySelectorAll('[data-limpar]').forEach(botao => {
-    botao.addEventListener('click', async () => {
-      const paciente = botao.getAttribute('data-limpar');
-      const est = estado[paciente];
-      const {ano, mes} = listaMeses[indiceMesSelecionado];
-      const nomePaciente = NOMES_PACIENTES[paciente];
-      const codigoDigitado = prompt(`Para apagar os registros de ${nomePaciente} em ${MESES[mes]} de ${ano}, digite o código de confirmação:`);
-      if(codigoDigitado === null) return; // cancelou
-      if(codigoDigitado !== CODIGO_PARA_LIMPAR){
-        alert('Código incorreto. Os registros não foram apagados.');
-        return;
-      }
-      if(!confirm(`Tem certeza que deseja apagar todos os registros de ${nomePaciente} em ${MESES[mes]} de ${ano}? Isso vale para todos que acessam esta página.`)) return;
-      const vazio = {};
-      diasUteis.forEach(d => vazio[formatarISO(d)] = {
-        entrada: HORARIO_PADRAO_ENTRADA,
-        saida: HORARIO_PADRAO_SAIDA,
-        falta: false,
-        observacao: ''
-      });
-      est.dados = vazio;
-      renderizarPaciente(paciente);
-      if(firestoreOk && est.docRef){
-        try{
-          await fnSetDoc(est.docRef, { dias: vazio }, { merge: false });
-        }catch(e){
-          console.error('Erro ao limpar:', e);
-        }
-      }
-    });
-  });
 
   let jaRolouNesteMes = false;
   function rolarParaHojeSeNecessario(){
     const {ano, mes} = listaMeses[indiceMesSelecionado];
     if(!(ano === anoAtual && mes === mesAtual)) return;
     if(jaRolouNesteMes) return;
-    const alvo = document.getElementById('linhaHoje-jose') || document.getElementById('linhaHoje-cirene');
+    const alvo = document.getElementById('linhaHoje');
     if(alvo){
       setTimeout(() => alvo.scrollIntoView({behavior:'smooth', block:'center'}), 200);
       jaRolouNesteMes = true;
     }
   }
 
-  // Renderiza a lista de dias (terças/quintas) dos dois pacientes imediatamente,
-  // sem depender do Firebase, e em paralelo tenta conectar ao banco de dados na nuvem.
-  trocarMes();
+  document.getElementById('btnLimparMes').addEventListener('click', async () => {
+    const {ano, mes} = listaMeses[indiceMesSelecionado];
+    const codigoDigitado = prompt(`Para apagar todos os registros de ${MESES[mes]} de ${ano}, digite o código de confirmação:`);
+    if(codigoDigitado === null) return;
+    if(codigoDigitado !== CODIGO_PARA_LIMPAR){
+      alert('Código incorreto.');
+      return;
+    }
+    if(!confirm(`Tem certeza que deseja apagar todos os registros de ${MESES[mes]} de ${ano}?`)) return;
+    const vazio = {};
+    diasUteis.forEach(d => vazio[formatarISO(d)] = {
+      entrada: HORARIO_PADRAO_ENTRADA,
+      saida: HORARIO_PADRAO_SAIDA,
+      faltaJose: false,
+      faltaCirene: false,
+      obsJose: '',
+      obsCirene: ''
+    });
+    dadosSessao = vazio;
+    renderizarDias();
+    if(firestoreOk && docRef){
+      try{
+        await fnSetDoc(docRef, { dias: vazio }, { merge: false });
+      }catch(e){
+        console.error('Erro ao limpar:', e);
+      }
+    }
+  });
+
+  // Firebase init
+  async function iniciarFirebase(){
+    try{
+      const [{ initializeApp }, { getFirestore, doc, setDoc, onSnapshot, getDoc }, authMod] = await Promise.all([
+        import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"),
+        import("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"),
+        import("https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js")
+      ]);
+      fnDoc = doc;
+      fnSetDoc = setDoc;
+      fnOnSnapshot = onSnapshot;
+      fnGetDoc = getDoc;
+      const app = initializeApp(firebaseConfig);
+      db = getFirestore(app);
+      firestoreOk = true;
+
+      const auth = authMod.getAuth(app);
+      authFns = {
+        auth,
+        signInWithEmailAndPassword: authMod.signInWithEmailAndPassword,
+        sendPasswordResetEmail: authMod.sendPasswordResetEmail,
+        signOut: authMod.signOut
+      };
+
+      authMod.onAuthStateChanged(auth, (user) => {
+        usuarioAutenticado = user;
+        if(user){
+          telaLoginEl.style.display = 'none';
+          appConteudoEl.classList.remove('escondido');
+          document.getElementById('emailLogado').textContent = user.email || '';
+          erroLoginEl.textContent = '';
+          trocarMes();
+          conectarPagamentos();
+          recalcularFinanceiro();
+        } else {
+          telaLoginEl.style.display = 'flex';
+          appConteudoEl.classList.add('escondido');
+          if(cancelarInscricao){ cancelarInscricao(); cancelarInscricao = null; }
+          if(cancelarInscricaoPagamentos){ cancelarInscricaoPagamentos(); cancelarInscricaoPagamentos = null; }
+        }
+      });
+    }catch(e){
+      console.error('Erro ao iniciar Firebase:', e);
+      statusEl.textContent = 'Erro ao conectar';
+      statusEl.classList.add('erro');
+    }
+  }
+
+  // Login
+  document.getElementById('formLogin').addEventListener('submit', async (ev) => {
+    ev.preventDefault();
+    erroLoginEl.textContent = '';
+    if(!authFns){
+      erroLoginEl.textContent = 'Aguarde o carregamento.';
+      return;
+    }
+    const email = document.getElementById('campoEmailLogin').value.trim();
+    const senha = document.getElementById('campoSenhaLogin').value;
+    btnEntrarEl.disabled = true;
+    btnEntrarEl.textContent = 'Entrando…';
+    try{
+      await authFns.signInWithEmailAndPassword(authFns.auth, email, senha);
+    }catch(e){
+      erroLoginEl.textContent = e.code === 'auth/wrong-password' ? 'Senha incorreta.' :
+                                 e.code === 'auth/user-not-found' ? 'E-mail não cadastrado.' :
+                                 'Erro ao entrar. Tente novamente.';
+    }finally{
+      btnEntrarEl.disabled = false;
+      btnEntrarEl.textContent = 'Entrar';
+    }
+  });
+
+  document.getElementById('btnEsqueciSenha').addEventListener('click', async () => {
+    const email = document.getElementById('campoEmailLogin').value.trim();
+    if(!email){ erroLoginEl.textContent = 'Digite seu e-mail.'; return; }
+    if(!authFns) return;
+    try{
+      await authFns.sendPasswordResetEmail(authFns.auth, email);
+      erroLoginEl.textContent = 'E-mail de redefinição enviado!';
+    }catch(e){
+      erroLoginEl.textContent = 'Erro ao enviar. Verifique o e-mail.';
+    }
+  });
+
+  document.getElementById('btnSair').addEventListener('click', () => {
+    if(authFns) authFns.signOut(authFns.auth);
+  });
+
+  document.getElementById('dataHojeTexto').textContent =
+    `${DIAS_SEMANA[hoje.getDay()].charAt(0).toUpperCase()+DIAS_SEMANA[hoje.getDay()].slice(1)}, ${hoje.getDate()} de ${MESES[mesAtual]}`;
+
   iniciarFirebase();
 </script>
 
