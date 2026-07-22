@@ -17,26 +17,27 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
+    --fundo-escuro: #2A1A20;
+    --fundo-card: #3D2830;
     --rosa-escuro: #9D174D;
     --rosa-medio: #DB2777;
     --rosa-claro: #FCE7F3;
     --rosa-claro2: #FBCFE8;
     --branco: #FFFFFF;
-    --texto-escuro: #3B0A24;
-    --texto-claro: #FFFFFF;
-    --alerta: #9F1239;
-    --alerta-bg: #FFE4E9;
-    --sombra: 0 8px 24px rgba(157,23,77,0.18);
+    --texto-claro: #F5E6ED;
+    --texto-escuro: #1A0A10;
+    --alerta: #FF6B6B;
+    --alerta-bg: #4A2028;
+    --sombra: 0 8px 24px rgba(0,0,0,0.5);
     --raio: 16px;
-    --fundo: #FFF5F9;
   }
 
   * { box-sizing: border-box; margin:0; padding:0; }
   html { font-size: 112.5%; }
   body {
     font-family: 'Inter', system-ui, sans-serif;
-    background: var(--fundo);
-    color: var(--texto-escuro);
+    background: var(--fundo-escuro);
+    color: var(--texto-claro);
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
     padding-bottom: 3rem;
@@ -51,7 +52,7 @@
 
   /* Cabeçalho */
   header.topo {
-    background: linear-gradient(135deg, var(--rosa-escuro), var(--rosa-medio));
+    background: linear-gradient(135deg, #4A1A2A, var(--rosa-escuro));
     color: var(--texto-claro);
     padding: 1.4rem 1.1rem 1.6rem;
     border-radius: 0 0 28px 28px;
@@ -65,7 +66,7 @@
     right: -40px; top: -60px;
     width: 180px; height: 180px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.06);
   }
   .barra-superior {
     display: flex;
@@ -80,7 +81,7 @@
     letter-spacing: .12em;
     font-size: .72rem;
     font-weight: 700;
-    opacity: .9;
+    opacity: .8;
     margin: 0 0 .2rem;
   }
   h1.nome {
@@ -93,7 +94,7 @@
   .subtitulo-header {
     font-size: .9rem;
     font-weight: 600;
-    opacity: .85;
+    opacity: .8;
     margin-top: -.2rem;
   }
 
@@ -110,10 +111,10 @@
     display: flex;
     align-items: center;
     gap: .5rem;
-    background: rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.12);
     padding: .3rem .8rem .3rem .3rem;
     border-radius: 999px;
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(4px);
   }
   .foto-paciente img {
     width: 2.6rem;
@@ -135,8 +136,8 @@
     z-index: 1;
   }
   .controle-texto button {
-    background: rgba(255,255,255,0.16);
-    border: 1.5px solid rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.12);
+    border: 1.5px solid rgba(255,255,255,0.3);
     color: #fff;
     width: 2.5rem;
     height: 2.5rem;
@@ -156,7 +157,7 @@
     margin-top: .9rem;
     padding: .35rem .7rem;
     border-radius: 999px;
-    background: rgba(255,255,255,0.16);
+    background: rgba(255,255,255,0.1);
     width: fit-content;
     position: relative;
     z-index: 1;
@@ -188,14 +189,14 @@
   .email-logado {
     font-size: .82rem;
     font-weight: 700;
-    opacity: .9;
+    opacity: .8;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
   .btn-sair {
-    background: rgba(255,255,255,0.16);
-    border: 1.5px solid rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.12);
+    border: 1.5px solid rgba(255,255,255,0.3);
     color: #fff;
     font-size: .82rem;
     font-weight: 800;
@@ -215,8 +216,8 @@
     z-index: 1;
   }
   .navegador-mes button {
-    background: rgba(255,255,255,0.18);
-    border: 1.5px solid rgba(255,255,255,0.55);
+    background: rgba(255,255,255,0.12);
+    border: 1.5px solid rgba(255,255,255,0.3);
     color: #fff;
     width: 2.8rem;
     height: 2.8rem;
@@ -235,9 +236,9 @@
   }
   .navegador-mes select {
     flex: 1;
-    background: #fff;
-    color: var(--texto-escuro);
-    border: none;
+    background: var(--fundo-card);
+    color: var(--texto-claro);
+    border: 1px solid var(--rosa-medio);
     border-radius: 12px;
     font-weight: 800;
     font-size: 1.05rem;
@@ -255,9 +256,9 @@
   }
 
   .aviso-mes-passado {
-    background: #FFF4E6;
-    border: 1.5px solid #F0C089;
-    color: #6B4200;
+    background: #4A2A1A;
+    border: 1.5px solid #B87A4A;
+    color: #F5D4B8;
     font-weight: 700;
     font-size: .92rem;
     border-radius: 12px;
@@ -267,7 +268,7 @@
   }
 
   .cartao-hoje {
-    background: var(--branco);
+    background: var(--fundo-card);
     border: 2.5px solid var(--rosa-medio);
     border-radius: var(--raio);
     box-shadow: var(--sombra);
@@ -284,15 +285,15 @@
     font-weight: 800;
     letter-spacing: .1em;
     text-transform: uppercase;
-    color: var(--rosa-medio);
+    color: var(--rosa-claro);
     margin: 0 0 .25rem;
   }
   .cartao-hoje .data-grande {
     font-family: 'Poppins', sans-serif;
     font-weight: 700;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     margin: 0;
-    color: var(--texto-escuro);
+    color: var(--branco);
   }
   .pulso {
     width: .8rem; height: .8rem;
@@ -317,21 +318,21 @@
   }
 
   .linha-dia {
-    background: var(--branco);
+    background: var(--fundo-card);
     border-radius: var(--raio);
-    border: 1.5px solid var(--rosa-claro2);
+    border: 1.5px solid #5A3A4A;
     padding: 1rem 1.1rem;
-    box-shadow: 0 2px 8px rgba(157,23,77,0.06);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
     transition: border-color .2s, box-shadow .2s;
   }
   .linha-dia.hoje {
     border-color: var(--rosa-medio);
-    box-shadow: 0 0 0 4px rgba(219,39,119,0.12);
-    background: linear-gradient(180deg, #FFFFFF, #FFF0F6);
+    box-shadow: 0 0 0 4px rgba(219,39,119,0.2);
+    background: #3D2830;
   }
-  .linha-dia.falta-jose, .linha-dia.falta-cirene {
-    background: var(--alerta-bg);
-    border-color: #E0A868;
+  .linha-dia.falta {
+    background: #3A2028;
+    border-color: #B85A5A;
   }
 
   .linha-cabeca {
@@ -344,15 +345,15 @@
   }
   .dia-semana {
     font-weight: 800;
-    font-size: 1.2rem;
-    color: var(--rosa-escuro);
+    font-size: 1.3rem;
+    color: var(--rosa-claro);
   }
   .dia-numero {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 700;
-    color: #6B2A4A;
+    color: #1A0A10;
     background: var(--rosa-claro);
-    padding: .1rem .7rem;
+    padding: .1rem .8rem;
     border-radius: 999px;
   }
   .tag-hoje {
@@ -377,7 +378,7 @@
     display: block;
     font-size: .78rem;
     font-weight: 700;
-    color: #5C3B4A;
+    color: #C9A8B8;
     text-transform: uppercase;
     letter-spacing: .04em;
     margin-bottom: .25rem;
@@ -386,16 +387,16 @@
     width: 100%;
     padding: .6rem .5rem;
     border-radius: 10px;
-    border: 2px solid var(--rosa-claro2);
+    border: 2px solid #5A3A4A;
     font-size: 1.1rem;
     font-weight: 600;
-    color: var(--texto-escuro);
-    background: #FFFBFD;
+    color: var(--texto-claro);
+    background: #2A1A20;
     min-height: 2.8rem;
   }
   .campo input[type="time"]:disabled {
-    opacity: .5;
-    background: #F0E8EC;
+    opacity: .4;
+    background: #1A0A10;
   }
   .campo input[type="time"]:focus {
     outline: none;
@@ -411,27 +412,19 @@
     margin: .5rem 0 .3rem;
   }
   .paciente-coluna {
-    background: #FFF8FA;
+    background: #2A1A20;
     border-radius: 12px;
     padding: .7rem .8rem;
-    border: 1px solid var(--rosa-claro);
+    border: 1px solid #5A3A4A;
   }
   .paciente-coluna .nome-coluna {
     font-weight: 800;
     font-size: .95rem;
-    color: var(--rosa-escuro);
+    color: var(--rosa-claro);
     margin: 0 0 .4rem;
     display: flex;
     align-items: center;
     gap: .4rem;
-  }
-  .paciente-coluna .nome-coluna .mini-foto {
-    width: 1.8rem;
-    height: 1.8rem;
-    border-radius: 50%;
-    object-fit: cover;
-    background: #ddd;
-    border: 1px solid var(--rosa-claro2);
   }
 
   .campo-observacao {
@@ -441,7 +434,7 @@
     display: block;
     font-size: .72rem;
     font-weight: 700;
-    color: #5C3B4A;
+    color: #C9A8B8;
     text-transform: uppercase;
     letter-spacing: .04em;
     margin-bottom: .2rem;
@@ -450,9 +443,10 @@
     width: 100%;
     padding: .5rem .6rem;
     border-radius: 8px;
-    border: 1.5px solid var(--rosa-claro2);
+    border: 1.5px solid #5A3A4A;
     font-size: .9rem;
-    background: #FFFBFD;
+    background: #2A1A20;
+    color: var(--texto-claro);
     min-height: 2.8rem;
     resize: vertical;
   }
@@ -462,18 +456,23 @@
     box-shadow: 0 0 0 3px rgba(219,39,119,.12);
   }
 
-  .falta-toggle {
+  /* Falta única */
+  .falta-unica {
     display: flex;
     align-items: center;
-    gap: .4rem;
-    font-size: .9rem;
+    gap: .6rem;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--alerta);
     cursor: pointer;
     user-select: none;
     margin-top: .3rem;
+    padding: .3rem .6rem;
+    background: #3A2028;
+    border-radius: 8px;
+    border: 1px solid #5A3A4A;
   }
-  .falta-toggle input {
+  .falta-unica input {
     width: 1.5rem;
     height: 1.5rem;
     accent-color: var(--alerta);
@@ -483,15 +482,15 @@
   .horas-dia {
     font-size: 1rem;
     font-weight: 800;
-    color: var(--rosa-escuro);
-    background: var(--rosa-claro);
+    color: var(--rosa-claro);
+    background: #3A2830;
     padding: .3rem .8rem;
     border-radius: 999px;
     display: inline-block;
   }
   .horas-dia.vazio {
-    color: #5C3B4A;
-    background: #F0E8EC;
+    color: #8A6A7A;
+    background: #1A0A10;
   }
   .rodape-linha {
     display: flex;
@@ -507,7 +506,7 @@
     margin-top: 2rem;
   }
   .resumo-individual {
-    background: linear-gradient(135deg, var(--rosa-escuro), var(--rosa-medio));
+    background: linear-gradient(135deg, #3A1A2A, var(--rosa-escuro));
     color: var(--texto-claro);
     border-radius: 18px;
     padding: 1rem 1rem;
@@ -547,9 +546,9 @@
     flex-wrap: wrap;
   }
   .btn-limpar {
-    background: #fff;
-    border: 2px solid #D4B8C8;
-    color: #5C3B4A;
+    background: #2A1A20;
+    border: 2px solid #5A3A4A;
+    color: var(--texto-claro);
     font-size: .95rem;
     font-weight: 700;
     padding: .6rem 1.4rem;
@@ -560,8 +559,8 @@
 
   /* Painel financeiro */
   .painel-financeiro {
-    background: var(--branco);
-    border: 2px solid var(--rosa-claro2);
+    background: var(--fundo-card);
+    border: 2px solid #5A3A4A;
     border-radius: var(--raio);
     box-shadow: var(--sombra);
     margin-top: 2rem;
@@ -571,7 +570,7 @@
     font-family: 'Poppins', sans-serif;
     font-weight: 800;
     font-size: 1.1rem;
-    color: var(--rosa-escuro);
+    color: var(--rosa-claro);
     margin: 0 0 1rem;
   }
   .financeiro-grade {
@@ -581,27 +580,28 @@
     margin-bottom: 1rem;
   }
   .financeiro-item {
-    background: var(--rosa-claro);
+    background: #2A1A20;
     border-radius: 12px;
     padding: .8rem .9rem;
     text-align: center;
+    border: 1px solid #5A3A4A;
   }
   .financeiro-item .valor {
     display: block;
     font-family: 'Poppins', sans-serif;
     font-weight: 800;
     font-size: 1.15rem;
-    color: var(--rosa-escuro);
+    color: var(--rosa-claro);
   }
   .financeiro-item .rotulo {
     font-size: .72rem;
     font-weight: 700;
-    color: #5C3B4A;
+    color: #C9A8B8;
     text-transform: uppercase;
     letter-spacing: .04em;
   }
   .financeiro-progresso {
-    background: #F3E8EE;
+    background: #1A0A10;
     border-radius: 999px;
     height: .8rem;
     overflow: hidden;
@@ -615,7 +615,7 @@
   }
   .financeiro-legenda {
     font-size: .84rem;
-    color: #5C3B4A;
+    color: #C9A8B8;
     font-weight: 600;
     text-align: center;
     margin: 0 0 1rem;
@@ -623,9 +623,9 @@
   .btn-atualizar-financeiro {
     display: block;
     margin: 0 auto 1rem;
-    background: #fff;
-    border: 2px solid #D4B8C8;
-    color: #5C3B4A;
+    background: #2A1A20;
+    border: 2px solid #5A3A4A;
+    color: var(--texto-claro);
     font-size: .88rem;
     font-weight: 700;
     padding: .5rem 1.2rem;
@@ -642,19 +642,19 @@
     align-items: center;
     justify-content: space-between;
     gap: .6rem;
-    background: #FFFBFD;
-    border: 1.5px solid var(--rosa-claro2);
+    background: #2A1A20;
+    border: 1.5px solid #5A3A4A;
     border-radius: 10px;
     padding: .6rem .8rem;
   }
   .pacote-item.pago {
-    background: #F0FBF3;
-    border-color: #8CDDA6;
+    background: #1A2A1A;
+    border-color: #6AAA7A;
   }
   .pacote-item span.pacote-nome {
     font-weight: 700;
     font-size: .92rem;
-    color: var(--texto-escuro);
+    color: var(--texto-claro);
   }
   .pacote-item label {
     display: flex;
@@ -662,20 +662,20 @@
     gap: .4rem;
     font-size: .85rem;
     font-weight: 700;
-    color: #5C3B4A;
+    color: #C9A8B8;
     cursor: pointer;
   }
   .pacote-item input[type="checkbox"] {
     width: 1.3rem;
     height: 1.3rem;
-    accent-color: #2E9B54;
+    accent-color: #6AAA7A;
     cursor: pointer;
   }
 
   footer.rodape-app {
     text-align: center;
     font-size: .82rem;
-    color: #6B4A5A;
+    color: #6A4A5A;
     margin-top: 2rem;
     padding: 0 1.2rem;
   }
@@ -687,22 +687,23 @@
     align-items: center;
     justify-content: center;
     padding: 1.5rem;
-    background: linear-gradient(180deg, var(--rosa-claro) 0%, #FFF0F6 40%, #FFF8FB 100%);
+    background: var(--fundo-escuro);
   }
   .cartao-login {
-    background: #fff;
+    background: var(--fundo-card);
     border-radius: 22px;
     box-shadow: var(--sombra);
     padding: 2rem 1.6rem;
     max-width: 24rem;
     width: 100%;
+    border: 1px solid #5A3A4A;
   }
   .cartao-login .eyebrow-login {
     text-transform: uppercase;
     letter-spacing: .1em;
     font-size: .72rem;
     font-weight: 700;
-    color: var(--rosa-medio);
+    color: var(--rosa-claro);
     margin: 0 0 .3rem;
     text-align: center;
   }
@@ -712,23 +713,24 @@
     font-size: 1.5rem;
     text-align: center;
     margin: 0 0 1.4rem;
-    color: var(--texto-escuro);
+    color: var(--texto-claro);
   }
   .campo-login { margin-bottom: 1rem; }
   .campo-login label {
     display: block;
     font-size: .8rem;
     font-weight: 700;
-    color: #5C3B4A;
+    color: #C9A8B8;
     margin-bottom: .35rem;
   }
   .campo-login input {
     width: 100%;
     padding: .8rem .8rem;
     border-radius: 12px;
-    border: 2px solid var(--rosa-claro2);
+    border: 2px solid #5A3A4A;
     font-size: 1.05rem;
-    background: #FFFBFD;
+    background: #2A1A20;
+    color: var(--texto-claro);
     min-height: 3rem;
   }
   .campo-login input:focus {
@@ -757,14 +759,14 @@
     margin-top: 1rem;
     font-size: .88rem;
     font-weight: 700;
-    color: var(--rosa-medio);
+    color: var(--rosa-claro);
     background: none;
     border: none;
     cursor: pointer;
     text-decoration: underline;
   }
   .erro-login {
-    background: var(--alerta-bg);
+    background: #4A2028;
     color: var(--alerta);
     font-size: .88rem;
     font-weight: 700;
@@ -783,8 +785,8 @@
     .resumo-duplo { grid-template-columns: 1fr; }
     .fotos-pacientes { gap: .8rem; }
     .campos-horarios { grid-template-columns: 1fr; }
-    .dia-semana { font-size: 1rem; }
-    .dia-numero { font-size: .95rem; }
+    .dia-semana { font-size: 1.1rem; }
+    .dia-numero { font-size: 1rem; }
   }
   @media (prefers-reduced-motion: reduce) { .pulso { animation: none; } }
 </style>
@@ -828,19 +830,19 @@
     </div>
   </div>
 
-  <!-- Fotos dos pacientes (somente aqui, não se repetem) -->
+  <!-- Fotos dos pacientes (somente aqui) -->
   <div class="fotos-pacientes">
     <div class="foto-paciente">
-      <!-- Substitua o src pelo link da foto real de José -->
-      <img src="https://th.bing.com/th/id/OIP.g6P-TK9IsY8QCl1rMqp_PwHaHa?w=168&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3" alt="Foto de José" id="fotoJose">
+      <!-- Substitua o src pela foto real de José -->
+      <img src="https://via.placeholder.com/100/9D174D/FFFFFF?text=José" alt="Foto de José">
       <span>José</span>
     </div>
     <div class="foto-paciente">
-      <!-- Substitua o src pelo link da foto real de Cirene -->
-      <img src="data:image/webp;base64,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" alt="Foto de Cirene" id="fotoCirene">
+      <!-- Substitua o src pela foto real de Cirene -->
+      <img src="https://via.placeholder.com/100/DB2777/FFFFFF?text=Cirene" alt="Foto de Cirene">
       <span>Cirene</span>
     </div>
-    <span style="font-size:.75rem;opacity:.7;margin-left:auto;">Sessão conjunta</span>
+    <span style="font-size:.75rem;opacity:.6;margin-left:auto;">Sessão conjunta</span>
   </div>
 
   <div class="navegador-mes">
@@ -1128,9 +1130,9 @@
       const iso = formatarISO(d);
       const reg = dados[iso];
       if (!reg) return;
-      const faltouJose = !!reg.faltaJose;
-      const faltouCirene = !!reg.faltaCirene;
-      if (!(faltouJose && faltouCirene)) total++;
+      // Se a sessão tiver falta, não é cobrada
+      if (reg.falta) return;
+      total++;
     });
     return total;
   }
@@ -1274,8 +1276,7 @@
       const reg = salvo || {
         entrada: HORARIO_PADRAO_ENTRADA,
         saida: HORARIO_PADRAO_SAIDA,
-        faltaJose: false,
-        faltaCirene: false,
+        falta: false,
         obsJose: '',
         obsCirene: ''
       };
@@ -1283,8 +1284,7 @@
 
       const linha = document.createElement('div');
       linha.className = 'linha-dia' + (ehHoje ? ' hoje' : '');
-      if (reg.faltaJose) linha.classList.add('falta-jose');
-      if (reg.faltaCirene) linha.classList.add('falta-cirene');
+      if (reg.falta) linha.classList.add('falta');
       linha.id = ehHoje ? 'linhaHoje' : '';
 
       // Cabeçalho com data em destaque
@@ -1306,7 +1306,7 @@
       const iEntrada = document.createElement('input');
       iEntrada.type = 'time';
       iEntrada.value = reg.entrada || HORARIO_PADRAO_ENTRADA;
-      iEntrada.disabled = (reg.faltaJose && reg.faltaCirene);
+      iEntrada.disabled = reg.falta;
       iEntrada.addEventListener('change', () => {
         atualizarRegistro(iso, { entrada: iEntrada.value });
       });
@@ -1318,7 +1318,7 @@
       const iSaida = document.createElement('input');
       iSaida.type = 'time';
       iSaida.value = reg.saida || HORARIO_PADRAO_SAIDA;
-      iSaida.disabled = (reg.faltaJose && reg.faltaCirene);
+      iSaida.disabled = reg.falta;
       iSaida.addEventListener('change', () => {
         atualizarRegistro(iso, { saida: iSaida.value });
       });
@@ -1326,6 +1326,19 @@
 
       horarios.appendChild(cEntrada);
       horarios.appendChild(cSaida);
+
+      // Falta única
+      const faltaDiv = document.createElement('div');
+      faltaDiv.className = 'falta-unica';
+      const chkFalta = document.createElement('input');
+      chkFalta.type = 'checkbox';
+      chkFalta.checked = reg.falta || false;
+      chkFalta.addEventListener('change', () => {
+        atualizarRegistro(iso, { falta: chkFalta.checked });
+      });
+      const labelFalta = document.createTextNode('Falta (sessão cancelada)');
+      faltaDiv.appendChild(chkFalta);
+      faltaDiv.appendChild(labelFalta);
 
       // Grid pacientes
       const grid = document.createElement('div');
@@ -1338,11 +1351,8 @@
         <p class="nome-coluna">🧑 José</p>
         <div class="campo-observacao">
           <label>Observações</label>
-          <textarea rows="2" placeholder="Intercorrências, dor, etc.">${reg.obsJose || ''}</textarea>
+          <textarea rows="2" placeholder="Intercorrências, dor, etc." ${reg.falta ? 'disabled' : ''}>${reg.obsJose || ''}</textarea>
         </div>
-        <label class="falta-toggle">
-          <input type="checkbox" ${reg.faltaJose ? 'checked' : ''}> Falta
-        </label>
       `;
       const obsJose = colJose.querySelector('textarea');
       let timerJose = null;
@@ -1352,10 +1362,6 @@
           atualizarRegistro(iso, { obsJose: obsJose.value }, { semRenderizar: true });
         }, 500);
       });
-      const chkFaltaJose = colJose.querySelector('input[type="checkbox"]');
-      chkFaltaJose.addEventListener('change', () => {
-        atualizarRegistro(iso, { faltaJose: chkFaltaJose.checked });
-      });
 
       // Coluna Cirene
       const colCirene = document.createElement('div');
@@ -1364,11 +1370,8 @@
         <p class="nome-coluna">👩 Cirene</p>
         <div class="campo-observacao">
           <label>Observações</label>
-          <textarea rows="2" placeholder="Intercorrências, dor, etc.">${reg.obsCirene || ''}</textarea>
+          <textarea rows="2" placeholder="Intercorrências, dor, etc." ${reg.falta ? 'disabled' : ''}>${reg.obsCirene || ''}</textarea>
         </div>
-        <label class="falta-toggle">
-          <input type="checkbox" ${reg.faltaCirene ? 'checked' : ''}> Falta
-        </label>
       `;
       const obsCirene = colCirene.querySelector('textarea');
       let timerCirene = null;
@@ -1378,10 +1381,6 @@
           atualizarRegistro(iso, { obsCirene: obsCirene.value }, { semRenderizar: true });
         }, 500);
       });
-      const chkFaltaCirene = colCirene.querySelector('input[type="checkbox"]');
-      chkFaltaCirene.addEventListener('change', () => {
-        atualizarRegistro(iso, { faltaCirene: chkFaltaCirene.checked });
-      });
 
       grid.appendChild(colJose);
       grid.appendChild(colCirene);
@@ -1389,30 +1388,31 @@
       // Rodapé com horas
       const rodape = document.createElement('div');
       rodape.className = 'rodape-linha';
-      const horasCalculadas = (reg.faltaJose && reg.faltaCirene) ? null : calcularHoras(reg.entrada, reg.saida);
+      const horasCalculadas = reg.falta ? null : calcularHoras(reg.entrada, reg.saida);
       const horasSpan = document.createElement('span');
       horasSpan.className = 'horas-dia' + (horasCalculadas ? '' : ' vazio');
-      horasSpan.textContent = (reg.faltaJose && reg.faltaCirene) ? 'Ambos faltaram' : (horasCalculadas ? horasCalculadas.texto : '—');
+      horasSpan.textContent = reg.falta ? 'Falta' : (horasCalculadas ? horasCalculadas.texto : '—');
       rodape.appendChild(horasSpan);
 
       linha.appendChild(cabeca);
       linha.appendChild(horarios);
+      linha.appendChild(faltaDiv);
       linha.appendChild(grid);
       linha.appendChild(rodape);
       listaEl.appendChild(linha);
 
-      // Estatísticas
-      if (!reg.faltaJose && horasCalculadas) {
-        diasJose++;
-        minutosJose += horasCalculadas.minutos;
+      // Estatísticas (considerando falta única)
+      if (reg.falta) {
+        faltasJose++;
+        faltasCirene++;
+      } else {
+        if (horasCalculadas) {
+          diasJose++;
+          minutosJose += horasCalculadas.minutos;
+          diasCirene++;
+          minutosCirene += horasCalculadas.minutos;
+        }
       }
-      if (reg.faltaJose) faltasJose++;
-
-      if (!reg.faltaCirene && horasCalculadas) {
-        diasCirene++;
-        minutosCirene += horasCalculadas.minutos;
-      }
-      if (reg.faltaCirene) faltasCirene++;
     });
 
     // Atualizar resumos
@@ -1433,8 +1433,7 @@
     const atual = dadosSessao[iso] || {
       entrada: HORARIO_PADRAO_ENTRADA,
       saida: HORARIO_PADRAO_SAIDA,
-      faltaJose: false,
-      faltaCirene: false,
+      falta: false,
       obsJose: '',
       obsCirene: ''
     };
@@ -1471,8 +1470,7 @@
     diasUteis.forEach(d => vazio[formatarISO(d)] = {
       entrada: HORARIO_PADRAO_ENTRADA,
       saida: HORARIO_PADRAO_SAIDA,
-      faltaJose: false,
-      faltaCirene: false,
+      falta: false,
       obsJose: '',
       obsCirene: ''
     });
